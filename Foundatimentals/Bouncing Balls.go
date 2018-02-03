@@ -35,7 +35,7 @@ func BouncingBall(h, bounce, window float64) int {
 	if h > window {
 		total = 1
 		var current = h * bounce
-		for current > window  {
+		for current > window {
 			total += 2
 			current = current * bounce
 		}

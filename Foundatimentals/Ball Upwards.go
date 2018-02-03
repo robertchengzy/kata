@@ -21,12 +21,11 @@ Remember to convert the velocity from km/h to m/s or from m/s in km/h when neces
 The maximum height recorded by the device is not necessarily the maximum height reached by the ball.*/
 
 func round(x, unit float64) float64 {
-	return float64(int64(x /unit + 0.5)) * unit
+	return float64(int64(x/unit+0.5)) * unit
 }
 
-
 func MaxBall(v0 int) int {
-	return int(round((float64(v0)/ 3.6) / 0.981, 1.0))
+	return int(round((float64(v0)/3.6)/0.981, 1.0))
 }
 
 const (
@@ -34,20 +33,16 @@ const (
 )
 
 func heightAtTime(v0, t float64) float64 {
-	return v0 * t - 0.5 *  3.6 * g * t * t
+	return v0*t - 0.5*3.6*g*t*t
 }
 
 func MaxBall2(v0 int) int {
 	t, prevh, h := 0, 0., 0.
 	for {
-		prevh, h = h, heightAtTime(float64(v0), float64(t) / 10)
+		prevh, h = h, heightAtTime(float64(v0), float64(t)/10)
 		if prevh > h {
 			return t - 1
 		}
 		t++
 	}
 }
-
-
-
-
