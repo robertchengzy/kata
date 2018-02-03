@@ -1,4 +1,4 @@
-鲸科技打卡小程序
+git help
 
 ##### git fetch origin localv1.0
 ##### git merge origin/localv1.0 (git pull)
