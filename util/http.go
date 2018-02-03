@@ -1,8 +1,6 @@
 package util
 
 import (
-	. "jdk_bushu/logger"
-
 	"io/ioutil"
 	"net/http"
 	"errors"
@@ -17,23 +15,19 @@ import (
 func HttpUrlGet(url string) string {
 	res, err := http.Get(url)
 	if err != nil {
-		Logger.Warn("GetHttpUrl:[%v] failed:[%v] ", url, err)
 		return ""
 	}
 
 	defer res.Body.Close()
 	if res.StatusCode != http.StatusOK {
-		Logger.Warn("GetHttpUrl:[%v] resp code not ok: [%v]", url, res.StatusCode)
 		return ""
 	}
 
 	data, err := ioutil.ReadAll(res.Body)
 	if err != nil {
-		Logger.Warn("GetHttpUrl:[%v] failed:[%v] ", url, err)
 		return ""
 	}
 	if len(data) == 0 {
-		Logger.Warn("GetHttpUrl:[%v] failed length is zero ", url)
 		return ""
 	}
 	return string(data)
@@ -43,24 +37,20 @@ func HttpGet(url string) ([]byte, error) {
 	res, err := http.Get(url)
 
 	if err != nil {
-		Logger.Warn("GetHttpUrl:[%v] failed:[%v] ", url, err)
 		return nil, err
 	}
 
 	defer res.Body.Close()
 	if res.StatusCode != http.StatusOK {
-		Logger.Warn("GetHttpUrl:[%v] resp code not ok: [%v]", url, res.StatusCode)
 		return nil, errors.New("respone code error")
 	}
 
 	data, err := ioutil.ReadAll(res.Body)
 	if err != nil {
-		Logger.Warn("GetHttpUrl:[%v] failed:[%v] ", url, err)
 		return nil, err
 	}
 
 	if len(data) == 0 {
-		Logger.Warn("GetHttpUrl:[%v] failed length is zero ", url)
 		return nil, errors.New("length is zero")
 	}
 
@@ -82,28 +72,22 @@ func HttpPost(url, contentType string, params interface{}) ([]byte, error) {
 		params_bytes = []byte(params.(string))
 	}
 
-	Logger.Warn("params: [%v]", params)
-
 	res, err := http.Post(url, contentType, bytes.NewReader(params_bytes))
 	if err != nil {
-		Logger.Warn("POST err:[%v]", err)
 		return nil, err
 	}
 
 	defer res.Body.Close()
 	if res.StatusCode != http.StatusOK {
-		Logger.Warn("HttpPost:[%v] resp code not ok: [%v]", url, res.StatusCode)
 		return nil, errors.New("respone code error")
 	}
 
 	data, err := ioutil.ReadAll(res.Body)
 	if err != nil {
-		Logger.Warn("HttpPost:[%v] failed:[%v] ", url, err)
 		return nil, err
 	}
 
 	if len(data) == 0 {
-		Logger.Warn("GetHttpUrl:[%v] failed length is zero ", url)
 		return nil, errors.New("length is zero")
 	}
 
@@ -140,19 +124,16 @@ func PostFile(uri string, params map[string]string, paramName, fileName string, 
 	response, err := client.Do(request)
 
 	if err != nil {
-		Logger.Info("POST Data: err[%v]", err)
 		return nil, err
 	}
 
 	defer response.Body.Close()
 	if response.StatusCode != http.StatusOK {
-		Logger.Warn("response[%#v]", response)
 		return nil, errors.New("response.StatusCode =" + strconv.Itoa(response.StatusCode))
 	}
 
 	data, err := ioutil.ReadAll(response.Body)
 	if err != nil {
-		Logger.Warn("resp data err [%v]", data)
 		return nil, err
 	}
 
