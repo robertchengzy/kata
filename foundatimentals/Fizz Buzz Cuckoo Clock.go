@@ -1,4 +1,4 @@
-package Foundatimentals
+package foundatimentals
 
 import (
 	"strings"
@@ -45,14 +45,28 @@ Have fun!*/
 
 func FizzBuzzCuckooClock(time string) string {
 	timeArr := strings.Split(time, ":")
+	clock, _ := strconv.ParseInt(timeArr[0], 10, 64)
 	value, _ := strconv.ParseInt(timeArr[1], 10, 64)
 	if value == 30 {
 		return "Cuckoo"
 	}
 
+	var message string
 	if value == 0 {
+		if clock == 0 {
+			clock = 12
+		} else if clock >= 12 {
+			clock -= 12
+		}
 
+		for i := int64(0); i < clock; i++ {
+			if i == 0 {
+				message += "Cuckoo"
+				continue
+			}
+			message += " Cuckoo"
+		}
 	}
 
-	return ""
+	return message
 }

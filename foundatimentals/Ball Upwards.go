@@ -1,4 +1,4 @@
-package Foundatimentals
+package foundatimentals
 
 /*You throw a ball vertically upwards with an initial speed v (in km per hour).
 The height h of the ball at each time t is given by h = v*t - 0.5*g*t*t where g is Earth's gravity (g ~ 9.81 m/s**2).

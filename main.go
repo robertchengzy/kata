@@ -1,11 +1,11 @@
 package main
 
 import (
-	"kata/Foundatimentals"
+	"kata/foundatimentals"
 	"fmt"
 )
 
 func main() {
-	data := Foundatimentals.BouncingBall(5, -1, 1.5)
+	data := foundatimentals.FizzBuzzCuckooClock("12:00")
 	fmt.Println(data)
 }

@@ -1,4 +1,4 @@
-package Foundatimentals
+package foundatimentals
 
 import "math"
 
