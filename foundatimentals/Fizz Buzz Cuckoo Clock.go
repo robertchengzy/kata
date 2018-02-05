@@ -44,6 +44,25 @@ Some examples
 Have fun!*/
 
 func FizzBuzzCuckooClock(time string) string {
+	h, _ := strconv.Atoi(time[0:2])
+	m, _ := strconv.Atoi(time[3:5])
+	switch {
+	case m==0:
+		return strings.Repeat("Cuckoo ", (h+11)%12) + "Cuckoo"
+	case m==30:
+		return "Cuckoo"
+	case m%15 == 0:
+		return "Fizz Buzz"
+	case m%5 == 0:
+		return "Buzz"
+	case m%3 == 0:
+		return "Fizz"
+	default:
+		return "tick"
+	}
+}
+
+func FizzBuzzCuckooClock2(time string) string {
 	timeArr := strings.Split(time, ":")
 	clock, _ := strconv.ParseInt(timeArr[0], 10, 64)
 	value, _ := strconv.ParseInt(timeArr[1], 10, 64)
@@ -51,14 +70,14 @@ func FizzBuzzCuckooClock(time string) string {
 		return "Cuckoo"
 	}
 
-	var message string
 	if value == 0 {
 		if clock == 0 {
 			clock = 12
-		} else if clock >= 12 {
+		} else if clock > 12 {
 			clock -= 12
 		}
 
+		var message string
 		for i := int64(0); i < clock; i++ {
 			if i == 0 {
 				message += "Cuckoo"
@@ -66,7 +85,20 @@ func FizzBuzzCuckooClock(time string) string {
 			}
 			message += " Cuckoo"
 		}
+		return message
 	}
 
-	return message
+	if value%3 == 0 && value%5 == 0 {
+		return "Fizz Buzz"
+	}
+
+	if value%3 == 0 {
+		return "Fizz"
+	}
+
+	if value%5 == 0 {
+		return "Buzz"
+	}
+
+	return "tick"
 }
