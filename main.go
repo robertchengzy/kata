@@ -6,6 +6,6 @@ import (
 )
 
 func main() {
-	data := foundatimentals.FizzBuzzCuckooClock("11:15")
+	data := foundatimentals.Diagonal(7, 2)
 	fmt.Println(data)
 }
