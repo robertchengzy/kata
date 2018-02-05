@@ -6,6 +6,6 @@ import (
 )
 
 func main() {
-	data := foundatimentals.Diagonal(7, 2)
+	data := foundatimentals.DuplicateCount("abcdeaB11")
 	fmt.Println(data)
 }
