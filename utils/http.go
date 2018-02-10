@@ -10,6 +10,7 @@ import (
 	"encoding/json"
 	"os"
 	"io"
+	"github.com/xiam/resp"
 )
 
 func HttpUrlGet(url string) string {
@@ -55,6 +56,25 @@ func HttpGet(url string) ([]byte, error) {
 	}
 
 	return data, nil
+}
+
+func HttpGetJson(url string, v interface{}) error {
+	rep, err := http.Get(url)
+
+	if err != nil {
+		return err
+	}
+
+	defer rep.Body.Close()
+	if rep.StatusCode != http.StatusOK {
+		return errors.New("respone code error")
+	}
+
+	if err := json.NewDecoder(rep.Body).Decode(&v); err != nil {
+		return err
+	}
+
+	return nil
 }
 
 // contentType application/json | application/x-www-form-urlencoded
