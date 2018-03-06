@@ -10,7 +10,6 @@ import (
 	"encoding/json"
 	"os"
 	"io"
-	"github.com/xiam/resp"
 )
 
 func HttpUrlGet(url string) string {

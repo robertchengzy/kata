@@ -80,7 +80,7 @@ loop:
 		case true:
 			fmt.Println("breaking out...")
 			break loop
-			fallthrough
+			//fallthrough
 		case false:
 			fmt.Printf("1")
 			goto retry
