@@ -7,6 +7,7 @@ import (
 	"errors"
 )
 
+// 文件名过滤器
 func FileNameFiter(name string) string {
 	reg, _ := regexp.Compile("[/\\\\:*?<>|]")
 	return reg.ReplaceAllString(name, "")
@@ -17,17 +18,17 @@ func SetField(obj interface{}, name string, value interface{}) error {
 	structFieldValue := structValue.FieldByName(name)
 
 	if !structFieldValue.IsValid() {
-		return fmt.Errorf("No such field: %s in obj", name)
+		return fmt.Errorf("no such field: %s in obj", name)
 	}
 
 	if !structFieldValue.CanSet() {
-		return fmt.Errorf("Cannot set %s field value", name)
+		return fmt.Errorf("cannot set %s field value", name)
 	}
 
 	structFieldType := structFieldValue.Type()
 	val := reflect.ValueOf(value)
 	if structFieldType != val.Type() {
-		invalidTypeError := errors.New("Provided value type didn't match obj field type")
+		invalidTypeError := errors.New("provided value type didn't match obj field type")
 		return invalidTypeError
 	}
 
