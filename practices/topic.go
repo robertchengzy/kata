@@ -90,6 +90,7 @@ func exercise2() {
 	t.ShowA()
 }
 
+// 可能会抛出异常，case可能是第一个也可能是第二个
 func exercise3() {
 	runtime.GOMAXPROCS(1)
 	intChan := make(chan int, 1)
