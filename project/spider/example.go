@@ -4,10 +4,9 @@ import (
 	"fmt"
 
 	"github.com/gocolly/colly"
-	"golang.org/x/net/html"
 )
 
-func main() {
+func example() {
 	// Instantiate default collector
 	c := colly.NewCollector(
 		// Visit only domains: hackerspaces.org, wiki.hackerspaces.org
