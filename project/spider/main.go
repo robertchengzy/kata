@@ -11,9 +11,12 @@ import (
 	"github.com/satori/go.uuid"
 	"path"
 	"strings"
+	"errors"
+	"encoding/json"
+	"strconv"
+	"encoding/xml"
 )
 
-//  http://***.tumblr.com/api/read?start=0&num=50&type=photo
 func main() {
 	imgUrlCh := make(chan string)
 	errInfoCh := make(chan ErrorInfo, 100)
@@ -21,7 +24,6 @@ func main() {
 		go DownloadUrl(imgUrlCh, errInfoCh)
 	}
 	var count = 0
-
 	//imgUrlCh <- imgUrl
 	count++
 
@@ -89,4 +91,29 @@ func DownloadUrl(urlCh <-chan string, errInfoCh chan<- ErrorInfo) {
 			return
 		}()
 	}
+}
+
+// http://***.tumblr.com/api/read?start=0&num=50&type=photo
+const (
+	TumblrUrl = "http://%s.tumblr.com/api/read?start=%d&num=%d&type=%s"
+	TumblrPhoto = "photo"
+)
+func GetTumblrData(name, kind string, start, num int) (*Tumblr, error) {
+	reqUrl := fmt.Sprintf(TumblrUrl, name, start, num, kind)
+
+	resp, err := httpClient.Get(reqUrl)
+	if err != nil {
+		return nil, err
+	}
+	defer resp.Body.Close()
+	if resp.StatusCode != http.StatusOK {
+		return nil, errors.New("respone code error " + strconv.Itoa(resp.StatusCode))
+	}
+
+	tumblr := new(Tumblr)
+	if err := xml.NewDecoder(resp.Body).Decode(tumblr); err != nil {
+		return nil, err
+	}
+
+	return tumblr, nil
 }

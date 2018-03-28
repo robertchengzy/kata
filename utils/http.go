@@ -58,18 +58,18 @@ func HttpGet(url string) ([]byte, error) {
 }
 
 func HttpGetJson(url string, v interface{}) error {
-	rep, err := http.Get(url)
+	resp, err := http.Get(url)
 
 	if err != nil {
 		return err
 	}
 
-	defer rep.Body.Close()
-	if rep.StatusCode != http.StatusOK {
+	defer resp.Body.Close()
+	if resp.StatusCode != http.StatusOK {
 		return errors.New("respone code error")
 	}
 
-	if err := json.NewDecoder(rep.Body).Decode(&v); err != nil {
+	if err := json.NewDecoder(resp.Body).Decode(&v); err != nil {
 		return err
 	}
 
