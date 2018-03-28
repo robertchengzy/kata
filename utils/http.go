@@ -10,7 +10,45 @@ import (
 	"encoding/json"
 	"os"
 	"io"
+	"time"
+	"net"
 )
+
+var (
+	httpClient *http.Client
+)
+
+// init HTTPClient
+func init() {
+	httpClient = createHTTPClient()
+}
+
+const (
+	MaxIdleConns = 100
+	MaxIdleConnsPerHost = 100
+	IdleConnTimeout = 90
+)
+
+// createHTTPClient for connection re-use
+func createHTTPClient() *http.Client {
+	client := &http.Client{
+		Transport: &http.Transport{
+			Proxy: http.ProxyFromEnvironment,
+			DialContext: (&net.Dialer{
+				Timeout:   30 * time.Second,
+				KeepAlive: 30 * time.Second,
+			}).DialContext,
+			MaxIdleConns:        MaxIdleConns,
+			MaxIdleConnsPerHost: MaxIdleConnsPerHost,
+			IdleConnTimeout:	 time.Duration(IdleConnTimeout)* time.Second,
+		},
+
+
+		Timeout: 20 * time.Second,
+
+	}
+	return client
+}
 
 func HttpUrlGet(url string) string {
 	res, err := http.Get(url)
