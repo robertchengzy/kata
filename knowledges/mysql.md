@@ -1,0 +1,16 @@
+## SQL来查找一个数据库的重复索引和冗余索引
+SELECT
+	a.TABLE_SCHEMA,
+	a.TABLE_NAME,
+	a.COLUMN_NAME,
+	a.INDEX_NAME AS 'index1',
+	b.INDEX_NAME AS 'index2' 
+FROM
+	information_schema.STATISTICS a
+	JOIN information_schema.STATISTICS b ON a.TABLE_SCHEMA = b.TABLE_SCHEMA 
+	AND a.TABLE_NAME = b.TABLE_NAME 
+	AND a.SEQ_IN_INDEX = b.SEQ_IN_INDEX 
+	AND a.COLUMN_NAME = b.COLUMN_NAME 
+WHERE
+	a.SEQ_IN_INDEX = 1 
+	AND a.INDEX_NAME <> b.INDEX_NAME
