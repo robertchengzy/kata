@@ -6,6 +6,7 @@ import (
 	"strconv"
 	"errors"
 	"net/http"
+	"os"
 )
 
 type Tumblr struct {
@@ -72,6 +73,9 @@ func GetTumblrUrl(name string) ([]string, error) {
 		return nil, errors.New("name empty")
 	}
 
+	DownloadDir = DownloadDir + name + "/"
+	os.MkdirAll(DownloadDir, os.ModePerm)
+
 	data, err := GetTumblrData(name, TumblrPhoto, 0, 10)
 	if err != nil {
 		return nil, fmt.Errorf("GetTumblrData failed[%v]", err)
@@ -81,6 +85,7 @@ func GetTumblrUrl(name string) ([]string, error) {
 		return nil, errors.New("tubmlr data empty")
 	}
 
+	fmt.Println("total=", data.Posts.Total)
 	// TODO 根据total查找全部数据
 
 	urls := make([]string, 0, 10)
@@ -93,6 +98,8 @@ func GetTumblrUrl(name string) ([]string, error) {
 	if len(urls) == 0 {
 		return nil, errors.New("tubmlr data url empty")
 	}
+
+	fmt.Println("urls=", len(urls))
 
 	return urls, nil
 }

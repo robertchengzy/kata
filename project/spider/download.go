@@ -2,7 +2,6 @@ package tumblr
 
 import (
 	"time"
-	"github.com/satori/go.uuid"
 	"fmt"
 	"os"
 	"io"
@@ -11,22 +10,24 @@ import (
 	"runtime"
 	"net/url"
 	"net/http"
+	"sync/atomic"
+	"errors"
 )
 
-var downloadDir string
+var DownloadDir string
 var httpClient *http.Client
 var proxy = func(_ *http.Request) (*url.URL, error) {
-	return url.Parse("http://127.0.0.1:58788")
+	return url.Parse("http://127.0.0.1:58942")
 }
 
 func init() {
 	if runtime.GOOS == "windows" {
-		downloadDir = "E:/abcde/"
+		DownloadDir = "E:/abcde/"
 	} else {
-		downloadDir = "/Users/cheng/robert/"
+		DownloadDir = "/Users/cheng/robert/"
 	}
 
-	tr := &http.Transport{DisableKeepAlives: false, Proxy: proxy}
+	tr := &http.Transport{DisableKeepAlives: false}
 	httpClient = &http.Client{Timeout: 2 * time.Minute, Transport: tr}
 }
 
@@ -34,6 +35,8 @@ type ErrorInfo struct {
 	Err error
 	Msg string
 }
+
+var count int64 = 0
 
 func DownloadUrl(urlCh <-chan string, errInfoCh chan<- ErrorInfo) {
 	for dwUrl := range urlCh {
@@ -45,15 +48,26 @@ func DownloadUrl(urlCh <-chan string, errInfoCh chan<- ErrorInfo) {
 				errInfo.Err = err
 				errInfoCh <- errInfo
 			}()
+			atomic.AddInt64(&count, 1)
+
+			fileName := strings.Replace(DownloadDir+ path.Base(dwUrl), "pnj", "png", -1)
+			exists, err := PathExists(fileName)
+			if err != nil {
+				return
+			}
+
+			if exists {
+				err = errors.New("exists")
+				return
+			}
+
+			fmt.Println(atomic.LoadInt64(&count), fileName)
+
 			res, err := httpClient.Get(dwUrl)
 			if err != nil {
 				return
 			}
-			ext := strings.Replace(path.Ext(dwUrl), "pnj", "png", -1)
-			//uuidD, _ := uuid.NewV4()
-			uuidD := uuid.NewV4()
-			fileName := downloadDir + uuidD.String() + ext
-			fmt.Println(fileName)
+
 			file, err := os.Create(fileName)
 			if err != nil {
 				return
@@ -67,4 +81,16 @@ func DownloadUrl(urlCh <-chan string, errInfoCh chan<- ErrorInfo) {
 			return
 		}()
 	}
+}
+
+func PathExists(path string) (bool, error) {
+	_, err := os.Stat(path)
+	if err == nil {
+		return true, nil
+	}
+
+	if os.IsNotExist(err) {
+		return false, nil
+	}
+	return false, nil
 }
