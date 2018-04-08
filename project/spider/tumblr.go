@@ -46,6 +46,7 @@ type PhotoUrl struct {
 const (
 	TumblrUrl   = "http://%s.tumblr.com/api/read?start=%d&num=%d&type=%s"
 	TumblrPhoto = "photo"
+	TumblrVide  = "video"
 )
 
 func GetTumblrData(name, kind string, start, num int) (*Tumblr, error) {
@@ -68,12 +69,12 @@ func GetTumblrData(name, kind string, start, num int) (*Tumblr, error) {
 	return tumblr, nil
 }
 
-func GetTumblrUrl(name string, start, num int) ([]string, error) {
+func GetTumblrUrl(name, kind string, start, num int) ([]string, error) {
 	if name == "" {
 		return nil, errors.New("name empty")
 	}
 
-	data, err := GetTumblrData(name, TumblrPhoto, start, num)
+	data, err := GetTumblrData(name, kind, start, num)
 	if err != nil {
 		return nil, fmt.Errorf("GetTumblrData failed[%v]", err)
 	}
