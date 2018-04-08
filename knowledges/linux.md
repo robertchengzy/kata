@@ -15,3 +15,12 @@ ITMED_WAIT：等待所有分组死掉
 CLOSING：两边同时尝试关闭 
 TIME_WAIT：另一边已初始化一个释放 
 LAST_ACK：等待所有分组死掉
+
+1、netstat -tpln
+然后观察两个tomcat的监听是怎么写的
+
+2、iptables -vnL
+去查看到防火墙是否有信任lo
+
+3、getenforce
+检查selinux配置
