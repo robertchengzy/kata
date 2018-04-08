@@ -8,13 +8,14 @@ import (
 
 func main() {
 	imgUrlCh := make(chan string, 10)
-	errInfoCh := make(chan tumblr.ErrorInfo, 1000)
-	for worker := 1; worker <= 20; worker++ {
+	errInfoCh := make(chan tumblr.ErrorInfo, 10000)
+	for worker := 1; worker <= 10; worker++ {
 		go tumblr.DownloadUrl(imgUrlCh, errInfoCh)
 	}
 
 	fmt.Println("start")
-	imgUrls, err := tumblr.GetTumblrUrl("scotthei")
+	// verall80,smile67yt
+	imgUrls, err := tumblr.GetTumblrUrl("xxx1024", 0, 5)
 	if err != nil {
 		fmt.Printf("GetTumblrUrl failed [%v]\n", err)
 		return

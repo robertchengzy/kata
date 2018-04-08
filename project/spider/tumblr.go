@@ -68,15 +68,12 @@ func GetTumblrData(name, kind string, start, num int) (*Tumblr, error) {
 	return tumblr, nil
 }
 
-func GetTumblrUrl(name string) ([]string, error) {
+func GetTumblrUrl(name string, start, num int) ([]string, error) {
 	if name == "" {
 		return nil, errors.New("name empty")
 	}
 
-	DownloadDir = DownloadDir + name + "/"
-	os.MkdirAll(DownloadDir, os.ModePerm)
-
-	data, err := GetTumblrData(name, TumblrPhoto, 0, 10)
+	data, err := GetTumblrData(name, TumblrPhoto, start, num)
 	if err != nil {
 		return nil, fmt.Errorf("GetTumblrData failed[%v]", err)
 	}
@@ -98,6 +95,9 @@ func GetTumblrUrl(name string) ([]string, error) {
 	if len(urls) == 0 {
 		return nil, errors.New("tubmlr data url empty")
 	}
+
+	DownloadDir = DownloadDir + name + "/"
+	os.MkdirAll(DownloadDir, os.ModePerm)
 
 	fmt.Println("urls=", len(urls))
 
