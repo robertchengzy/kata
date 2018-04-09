@@ -26,3 +26,12 @@ WHERE
 
 ##### 查看等待锁的事务
 `SELECT * FROM INFORMATION_SCHEMA.INNODB_LOCK_WAITS;`
+
+##### 查看表的列数
+`SELECT
+ 	COUNt( * ) 
+ FROM
+ 	information_schema.COLUMNS 
+ WHERE
+ 	TABLE_SCHEMA = 'jdkopen' 
+ 	AND table_name = 'jdk_course'`
