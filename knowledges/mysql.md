@@ -1,5 +1,5 @@
-## SQL来查找一个数据库的重复索引和冗余索引
-SELECT
+##### SQL来查找一个数据库的重复索引和冗余索引
+`SELECT
 	a.TABLE_SCHEMA,
 	a.TABLE_NAME,
 	a.COLUMN_NAME,
@@ -13,17 +13,16 @@ FROM
 	AND a.COLUMN_NAME = b.COLUMN_NAME 
 WHERE
 	a.SEQ_IN_INDEX = 1 
-	AND a.INDEX_NAME <> b.INDEX_NAME;
+	AND a.INDEX_NAME <> b.INDEX_NAME;`
 	
-## 死锁日志	
-SHOW ENGINE INNODB STATUS;
+##### 死锁日志	
+`SHOW ENGINE INNODB STATUS;`
 
-查询 正在执行的事务：
-SELECT * FROM information_schema.INNODB_TRX;
+##### 查询 正在执行的事务：
+`SELECT * FROM information_schema.INNODB_TRX;`
 
-查看正在锁的事务
-SELECT * FROM INFORMATION_SCHEMA.INNODB_LOCKS; 
+##### 查看正在锁的事务
+`SELECT * FROM INFORMATION_SCHEMA.INNODB_LOCKS;`
 
-查看等待锁的事务
-
-SELECT * FROM INFORMATION_SCHEMA.INNODB_LOCK_WAITS;
+##### 查看等待锁的事务
+`SELECT * FROM INFORMATION_SCHEMA.INNODB_LOCK_WAITS;`
