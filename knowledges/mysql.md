@@ -35,3 +35,7 @@ WHERE
  WHERE
  	TABLE_SCHEMA = 'jdkopen' 
  	AND table_name = 'jdk_course'`
+ 	
+ 	
+##### 查看表的索引：
+`SHOW INDEX FROM table_name（表名）`
