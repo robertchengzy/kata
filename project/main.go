@@ -8,15 +8,14 @@ import (
 )
 
 func main() {
-	imgUrlCh := make(chan string, 10)
+	imgUrlCh := make(chan string, 5)
 	errInfoCh := make(chan tumblr.ErrorInfo, 10000)
-	for worker := 1; worker <= 10; worker++ {
+	for worker := 1; worker <= 5; worker++ {
 		go tumblr.DownloadUrl(imgUrlCh, errInfoCh)
 	}
 
 	fmt.Println("start")
-	// verall80,smile67yt
-	imgUrls, err := tumblr.GetTumblrUrl("jpnhotnurse", tumblr.TumblrPhoto, 0, math.MaxInt16)
+	imgUrls, err := tumblr.GetTumblrUrl("***", tumblr.TumblrPhoto, 50, math.MaxInt16)
 	if err != nil {
 		fmt.Printf("GetTumblrUrl failed [%v]\n", err)
 		return
@@ -32,6 +31,8 @@ func main() {
 		case info := <-errInfoCh:
 			if info.Err != nil {
 				fmt.Printf("download err[%v], url[%v]\n", info.Err, info.Msg)
+			} else {
+				fmt.Printf("download, url[%v]\n", info.Msg)
 			}
 		case <-time.After(60 * time.Second):
 			fmt.Println("timeout")

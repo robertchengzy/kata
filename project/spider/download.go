@@ -61,7 +61,7 @@ func DownloadUrl(urlCh <-chan string, errInfoCh chan<- ErrorInfo) {
 				return
 			}
 
-			fmt.Println(atomic.LoadInt64(&count), fileName)
+			fmt.Println(count, fileName)
 
 			res, err := httpClient.Get(dwUrl)
 			if err != nil {
