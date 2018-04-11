@@ -29,7 +29,7 @@ WHERE
 
 ##### 查看表的列数
 `SELECT
- 	COUNt( * ) 
+ 	COUNT(*) 
  FROM
  	information_schema.COLUMNS 
  WHERE
@@ -39,3 +39,10 @@ WHERE
  	
 ##### 查看表的索引：
 `SHOW INDEX FROM table_name（表名）`
+
+`
+FLUSH TABLE table_name;
+FLUSH STATUS;
+SELECT sql;
+SHOW STATUS LIKE 'hander_read%';
+`
