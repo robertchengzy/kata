@@ -46,3 +46,9 @@ FLUSH STATUS;
 SELECT sql;
 SHOW STATUS LIKE 'hander_read%';
 `
+
+##### 刷新表缓存并清除状态计数器
+`FLUSH TABLE t1;
+ FLUSH STATUS;
+ SELECT COUNT(*) FROM t1 WHERE i1 = 3 AND d = '2000-01-01';
+ SHOW STATUS LIKE 'handler_read%'`
