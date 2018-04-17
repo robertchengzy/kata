@@ -52,3 +52,6 @@ SHOW STATUS LIKE 'hander_read%';
  FLUSH STATUS;
  SELECT COUNT(*) FROM t1 WHERE i1 = 3 AND d = '2000-01-01';
  SHOW STATUS LIKE 'handler_read%'`
+ 
+ ##### 查看已打开的表数
+ SHOW GLOBAL STATUS LIKE 'Opened_tables';

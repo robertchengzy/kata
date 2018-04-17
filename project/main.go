@@ -21,11 +21,14 @@ func main() {
 		return
 	}
 
-	for i := 0; i < len(imgUrls); i++ {
-		imgUrlCh <- imgUrls[i]
-	}
+	go func() {
+		for i := 0; i < len(imgUrls); i++ {
+			imgUrlCh <- imgUrls[i]
+		}
 
-	close(imgUrlCh)
+		close(imgUrlCh)
+	}()
+
 	for i := 0; i < len(imgUrls); i++ {
 		select {
 		case info := <-errInfoCh:
@@ -34,7 +37,7 @@ func main() {
 			} else {
 				fmt.Printf("download, url[%v]\n", info.Msg)
 			}
-		case <-time.After(60 * time.Second):
+		case <-time.After(30 * time.Second):
 			fmt.Println("timeout")
 		}
 	}
