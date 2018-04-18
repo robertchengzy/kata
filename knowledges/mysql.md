@@ -54,4 +54,21 @@ SHOW STATUS LIKE 'hander_read%';
  SHOW STATUS LIKE 'handler_read%'`
  
  ##### 查看已打开的表数
- SHOW GLOBAL STATUS LIKE 'Opened_tables';
+ `SHOW GLOBAL STATUS LIKE 'Opened_tables';`
+ 
+ ##### 查看表的碎片
+ `SELECT
+  	table_name,
+  	ENGINE,
+  	table_rows,
+  	( data_length + index_length ) length,
+  	DATA_FREE 
+  FROM
+  	information_schema.TABLES 
+  WHERE
+  	TABLE_SCHEMA = 'jdkopen' 
+  	AND DATA_FREE > 0;`
+  	
+  ##### InnoDB清理碎片
+  `ALTER TABLE jdk_course_calendar ENGINE = INNODB;`
+  
