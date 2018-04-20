@@ -16,7 +16,7 @@ func AcquireLockWithTimeout(conn *redis.Client, lockName string, acquireTimeout,
 	end := time.Now().Unix() + acquireTimeout
 	for {
 		if time.Now().Unix() < end {
-			if boolLock, _ := conn.SetNX(lockKey, identifier); boolLock == true {
+			if boolLock, _ := conn.SetNX(lockKey, identifier); boolLock {
 				conn.Expire(lockKey, lockExpire)
 				return identifier
 			}
