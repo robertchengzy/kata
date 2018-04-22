@@ -34,8 +34,7 @@ WHERE
  	information_schema.COLUMNS 
  WHERE
  	TABLE_SCHEMA = 'jdkopen' 
- 	AND table_name = 'jdk_course'`
- 	
+ 	AND table_name = 'jdk_course'`	
  	
 ##### 查看表的索引：
 `SHOW INDEX FROM table_name（表名）`
@@ -71,8 +70,9 @@ SHOW STATUS LIKE 'hander_read%';
   	
 ##### InnoDB清理碎片
 `ALTER TABLE jdk_course_calendar ENGINE = INNODB;`
-  
 
-##### •如何查看数据库中的冗余索引select * from sys.schema_redundant_indexes;
+##### •如何查看数据库中的冗余索引
+`select * from sys.schema_redundant_indexes;`
 
-##### •如何获取未使用的索引select * from sys.schema_unused_indexes;
+##### •如何获取未使用的索引
+`select * from sys.schema_unused_indexes;`
