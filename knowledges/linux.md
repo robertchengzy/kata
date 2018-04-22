@@ -3,6 +3,7 @@
 `netstat -na|wc -l  `
 `netstat -nat|grep ESTABLISHED|wc -l  `
 
+```
 状态：描述 
 CLOSED：无连接是活动的或正在进行 
 LISTEN：服务器在等待进入呼叫 
@@ -15,6 +16,7 @@ ITMED_WAIT：等待所有分组死掉
 CLOSING：两边同时尝试关闭 
 TIME_WAIT：另一边已初始化一个释放 
 LAST_ACK：等待所有分组死掉
+```
 
 1、netstat -tpln
 然后观察两个tomcat的监听是怎么写的
