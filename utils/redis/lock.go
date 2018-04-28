@@ -25,7 +25,7 @@ func AcquireLockWithTimeout(conn *redis.Client, lockName string, acquireTimeout,
 				conn.Expire(lockKey, lockExpire)
 			}
 
-			time.Sleep(time.Duration(5) * time.Millisecond)
+			time.Sleep(5 * time.Millisecond)
 		} else {
 			break
 		}
