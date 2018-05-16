@@ -132,7 +132,7 @@ func HttpPost(url, contentType string, params interface{}) ([]byte, error) {
 
 	defer res.Body.Close()
 	if res.StatusCode != http.StatusOK {
-		return nil, errors.New("respone code error")
+		return nil, errors.New("response code error")
 	}
 
 	data, err := ioutil.ReadAll(res.Body)
