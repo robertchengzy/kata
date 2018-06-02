@@ -76,3 +76,6 @@ SHOW STATUS LIKE 'hander_read%';
 
 ##### •如何获取未使用的索引
 `select * from sys.schema_unused_indexes;`
+
+##### 查看表生成的DDL
+`show create table table_name;`
