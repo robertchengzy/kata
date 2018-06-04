@@ -41,30 +41,9 @@ func createHTTPClient() *http.Client {
 			ResponseHeaderTimeout: 60 * time.Second,
 			ExpectContinueTimeout: 1 * time.Second,
 		},
-		Timeout: 30 * time.Second,
+		Timeout: 60 * time.Second,
 	}
 	return client
-}
-
-func HttpUrlGet(url string) string {
-	res, err := http.Get(url)
-	if err != nil {
-		return ""
-	}
-
-	defer res.Body.Close()
-	if res.StatusCode != http.StatusOK {
-		return ""
-	}
-
-	data, err := ioutil.ReadAll(res.Body)
-	if err != nil {
-		return ""
-	}
-	if len(data) == 0 {
-		return ""
-	}
-	return string(data)
 }
 
 func HttpGet(url string) ([]byte, error) {
@@ -82,10 +61,6 @@ func HttpGet(url string) ([]byte, error) {
 	data, err := ioutil.ReadAll(res.Body)
 	if err != nil {
 		return nil, err
-	}
-
-	if len(data) == 0 {
-		return nil, errors.New("length is zero")
 	}
 
 	return data, nil
@@ -138,10 +113,6 @@ func HttpPost(url, contentType string, params interface{}) ([]byte, error) {
 	data, err := ioutil.ReadAll(res.Body)
 	if err != nil {
 		return nil, err
-	}
-
-	if len(data) == 0 {
-		return nil, errors.New("length is zero")
 	}
 
 	return data, nil
