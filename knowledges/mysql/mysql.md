@@ -71,11 +71,17 @@ SHOW STATUS LIKE 'hander_read%';
 ##### InnoDB清理碎片
 `ALTER TABLE jdk_course_calendar ENGINE = INNODB;`
 
-##### •如何查看数据库中的冗余索引
+##### 如何查看数据库中的冗余索引
 `select * from sys.schema_redundant_indexes;`
 
-##### •如何获取未使用的索引
+##### 如何获取未使用的索引
 `select * from sys.schema_unused_indexes;`
 
 ##### 查看表生成的DDL
 `show create table table_name;`
+
+##### 查看字符集
+`SHOW VARIABLES WHERE variable_name LIKE 'character\_set\_%' OR variable_name LIKE 'collation%';`
+
+##### 查看表信息
+`show table status like 'table_name'`
