@@ -7,7 +7,8 @@ import (
 )
 
 // redis 获取锁和释放锁
-
+// @param acquireTimeout 单位：纳秒
+// @param lockTimeout 单位：秒
 func AcquireLockWithTimeout(conn *redis.Client, lockName string, acquireTimeout, lockTimeout int64) string {
 	identifier := uuid.NewV4().String()
 	lockKey := "lock:" + lockName
