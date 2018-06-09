@@ -27,7 +27,7 @@ func init() {
 		DownloadDir = "/Users/cheng/robert/"
 	}
 
-	tr := &http.Transport{DisableKeepAlives: false}
+	tr := &http.Transport{DisableKeepAlives: false, Proxy: proxy}
 	httpClient = &http.Client{Timeout: 2 * time.Minute, Transport: tr}
 }
 

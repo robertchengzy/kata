@@ -9,19 +9,19 @@ import (
 	"os"
 )
 
-type Tumblr struct {
-	XMLName xml.Name `xml:"tumblr"`
-	Posts   Posts    `xml:"posts"`
+type PhotoTumblr struct {
+	XMLName xml.Name   `xml:"tumblr"`
+	Posts   PhotoPosts `xml:"posts"`
 }
 
-type Posts struct {
-	XMLName xml.Name `xml:"posts"`
-	Post    []Post   `xml:"post"`
-	Start   string   `xml:"start,attr"`
-	Total   string   `xml:"total,attr"`
+type PhotoPosts struct {
+	XMLName xml.Name    `xml:"posts"`
+	Post    []PhotoPost `xml:"post"`
+	Start   string      `xml:"start,attr"`
+	Total   string      `xml:"total,attr"`
 }
 
-type Post struct {
+type PhotoPost struct {
 	XMLName  xml.Name `xml:"post"`
 	PhotoSet PhotoSet `xml:"photoset"`
 }
@@ -43,14 +43,15 @@ type PhotoUrl struct {
 }
 
 // http://***.tumblr.com/api/read?start=0&num=50&type=photo
+// http://***.tumblr.com/api/read/json?start=0&num=50&type=photo
 const (
-	TumblrUrl   = "http://%s.tumblr.com/api/read?start=%d&num=%d&type=%s"
-	TumblrPhoto = "photo"
-	TumblrVide  = "video"
+	APIUrl   = "http://%s.tumblr.com/api/read?start=%d&num=%d&type=%s"
+	APIPhoto = "photo"
+	APIVideo = "video"
 )
 
-func GetTumblrData(name, kind string, start, num int) (*Tumblr, error) {
-	reqUrl := fmt.Sprintf(TumblrUrl, name, start, num, kind)
+func GetTumblrData(name, kind string, start, num int) (*PhotoTumblr, error) {
+	reqUrl := fmt.Sprintf(APIUrl, name, start, num, kind)
 
 	resp, err := httpClient.Get(reqUrl)
 	if err != nil {
@@ -61,7 +62,7 @@ func GetTumblrData(name, kind string, start, num int) (*Tumblr, error) {
 		return nil, errors.New("respone code error " + strconv.Itoa(resp.StatusCode))
 	}
 
-	tumblr := new(Tumblr)
+	tumblr := new(PhotoTumblr)
 	if err := xml.NewDecoder(resp.Body).Decode(tumblr); err != nil {
 		return nil, err
 	}

@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"kata/project/spider"
 	"time"
-	"math"
 )
 
 func main() {
@@ -15,7 +14,7 @@ func main() {
 	}
 
 	fmt.Println("start")
-	imgUrls, err := tumblr.GetTumblrUrl("***", tumblr.TumblrPhoto, 50, math.MaxInt16)
+	imgUrls, err := tumblr.GetTumblrUrl("girl-wife", tumblr.APIPhoto, 0, 800)
 	if err != nil {
 		fmt.Printf("GetTumblrUrl failed [%v]\n", err)
 		return
