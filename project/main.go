@@ -14,7 +14,7 @@ func main() {
 	}
 
 	fmt.Println("start")
-	imgUrls, err := tumblr.GetTumblrUrl("girl-wife", tumblr.APIPhoto, 0, 800)
+	imgUrls, err := tumblr.GetTumblrUrl("-", tumblr.APIPhoto, 0, 800)
 	if err != nil {
 		fmt.Printf("GetTumblrUrl failed [%v]\n", err)
 		return
