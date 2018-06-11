@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"errors"
 	"math"
+	"unicode/utf8"
 )
 
 // 文件名过滤器
@@ -53,6 +54,7 @@ func (s *MyStruct) FillStruct(m map[string]interface{}) error {
 }
 
 const MIN = 0.000001
+
 // MIN 为用户自定义的比较精度
 func IsEqual(f1, f2 float64) bool {
 	return math.Dim(f1, f2) < MIN
@@ -116,4 +118,16 @@ func main() {
 		fmt.Println(err)
 	}
 	fmt.Println(result)
+}
+
+// 过滤 emoji 表情
+func FilterEmoji(content string) string {
+	newContent := ""
+	for _, value := range content {
+		_, size := utf8.DecodeRuneInString(string(value))
+		if size <= 3 {
+			newContent += string(value)
+		}
+	}
+	return newContent
 }
