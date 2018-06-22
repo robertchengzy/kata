@@ -73,3 +73,6 @@ git help
 
 ##### 清理分支
 ##### git remote prune origin
+
+##### 自动生成model文件jdk_user
+##### bee generate appcode -tables="jdk_user"  -driver=mysql -conn="root:XZhenzhuangtodb@(106.14.194.171:59027)/jdkopen" -level=1
