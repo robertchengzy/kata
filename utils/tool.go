@@ -7,6 +7,8 @@ import (
 	"errors"
 	"math"
 	"unicode/utf8"
+	"strings"
+	"strconv"
 )
 
 // 文件名过滤器
@@ -130,4 +132,37 @@ func FilterEmoji(content string) string {
 		}
 	}
 	return newContent
+}
+
+// 版本比较 1.0.0  0.9.9
+func ComapreVersion(version1, version2 string) int {
+	v1 := strings.Split(version1, ".")
+	v2 := strings.Split(version2, ".")
+	len1 := len(v1)
+	len2 := len(v2)
+
+	length := len1
+	if len1 < len2 {
+		length = len(v2)
+	}
+
+	if len1 < length {
+		v1 = append(v1, "0")
+	}
+
+	if len2 < length {
+		v2 = append(v2, "0")
+	}
+
+	for i := 0; i < length; i++ {
+		num1, _ := strconv.ParseInt(v1[i], 10, 64)
+		num2, _ := strconv.ParseInt(v2[i], 10, 64)
+		if num1 > num2 {
+			return 1
+		} else if num1 < num2 {
+			return -1
+		}
+	}
+
+	return 0
 }
