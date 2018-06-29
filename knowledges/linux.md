@@ -54,3 +54,5 @@ LAST_ACK：等待所有分组死掉
 -k 发送keep-alive指令到服务器端
 
 ##### ab -n 1000 -c 1000 -T http://github.com
+
+#### ln -s /usr/bin/ffmpeg /usr/local/bin/ffmpeg
