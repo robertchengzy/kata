@@ -9,6 +9,7 @@ import (
 	"unicode/utf8"
 	"strings"
 	"strconv"
+	"time"
 )
 
 // 文件名过滤器
@@ -165,4 +166,13 @@ func ComapreVersion(version1, version2 string) int {
 	}
 
 	return 0
+}
+
+func GetPointTime(t *time.Time) (*time.Time, error) {
+	now := time.Now()
+	nowBytes, _ := now.MarshalText()
+
+	t = new(time.Time)
+	err := t.UnmarshalText(nowBytes)
+	return t, err
 }
