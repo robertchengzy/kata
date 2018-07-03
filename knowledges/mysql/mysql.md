@@ -100,3 +100,6 @@ SHOW STATUS LIKE 'hander_read%';
  	INNER JOIN INFORMATION_SCHEMA.INNODB_TRX R ON R.TRX_ID = W.REQUESTING_TRX_ID;`
  	
 ##### 固定字段state 状态 created_at 创建时间 updated_at 更新时间
+
+##### 
+`SELECT TABLE_NAME,table_comment FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'jdkopen';`
