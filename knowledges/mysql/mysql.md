@@ -101,5 +101,13 @@ SHOW STATUS LIKE 'hander_read%';
  	
 ##### 固定字段state 状态 created_at 创建时间 updated_at 更新时间
 
-##### 
+##### 查询库中表的备注信息
 `SELECT TABLE_NAME,table_comment FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'jdkopen';`
+
+我们知道InnoDB一个page的默认大小是16k。由于是Btree组织，要求叶子节点上一个page至少要包含两条记录（否则就退化链表了）。
+
+所以一个记录最多不能超过8k。
+
+又由于InnoDB的聚簇索引结构，一个二级索引要包含主键索引，因此每个单个索引不能超过4k （极端情况，primay-key和某个二级索引都达到这个限制）。
+
+由于需要预留和辅助空间，扣掉后不能超过3500，取个“整数”就是 (1024bytes*3=3072bytes)。
