@@ -1,5 +1,7 @@
 package leetcode
 
+import "fmt"
+
 func fibonacci(n int) (res int) {
 	if n <= 1 {
 		res = 1
@@ -25,5 +27,12 @@ func fibonaccifunc() func() int {
 		// 重新赋值
 		back1, back2 = back2, back1+back2
 		return back1
+	}
+}
+
+func fibonaccifuncTest() {
+	f := fibonaccifunc()      //  返回一个闭包函数
+	for i := 0; i < 10; i++ { // 检测下前10个值
+		fmt.Println(f())
 	}
 }
