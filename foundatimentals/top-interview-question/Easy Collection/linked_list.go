@@ -143,8 +143,7 @@ func isPalindromeLinkedList(head *ListNode) bool {
 // Linked List Cycle
 // 1.Use two pointers, walker and runner.
 // 2.walker moves step by step. runner moves two steps at time.
-// 3.if the Linked List has a cycle walker and runner will meet at some
-//point.
+// 3.if the Linked List has a cycle walker and runner will meet at some point.
 func hasCycle(head *ListNode) bool {
 	if head == nil {
 		return false
