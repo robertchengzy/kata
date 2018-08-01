@@ -132,11 +132,7 @@ func rotate3(nums []int, k int) {
 }
 
 func reverse(nums []int, start, end int) {
-	for {
-		if start >= end {
-			break
-		}
-
+	for start < end {
 		temp := nums[start]
 		nums[start] = nums[end]
 		nums[end] = temp
