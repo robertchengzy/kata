@@ -1,4 +1,4 @@
-package top_interview_question
+package basics
 
 import "fmt"
 
