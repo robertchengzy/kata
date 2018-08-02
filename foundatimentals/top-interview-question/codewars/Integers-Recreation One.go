@@ -1,4 +1,4 @@
-package foundatimentals
+package codewars
 
 import "math"
 

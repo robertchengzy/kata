@@ -1,4 +1,4 @@
-package foundatimentals
+package codewars
 
 import "strings"
 
@@ -43,4 +43,3 @@ func duplicate_count1(s1 string) int {
 
 	return sum
 }
-

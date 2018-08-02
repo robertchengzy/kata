@@ -1,4 +1,4 @@
-package foundatimentals
+package codewars
 
 /*Return a new array consisting of elements which are multiple of their own index in input array (length > 1).
 
@@ -10,11 +10,11 @@ Some cases:
 
 [-56,-85,72,-26,-14,76,-27,72,35,-21,-67,87,0,21,59,27,-92,68] => [-85, 72, 0, 68]*/
 
-func multipleOfIndex (ints []int) []int {
+func multipleOfIndex(ints []int) []int {
 	var out []int
 
 	for i := 1; i < len(ints); i++ {
-		if ints[i] % i == 0 {
+		if ints[i]%i == 0 {
 			out = append(out, ints[i])
 		}
 	}

@@ -1,8 +1,8 @@
-package foundatimentals
+package codewars
 
 import (
-	"strings"
 	"strconv"
+	"strings"
 )
 
 /*Your story
@@ -47,9 +47,9 @@ func FizzBuzzCuckooClock(time string) string {
 	h, _ := strconv.Atoi(time[0:2])
 	m, _ := strconv.Atoi(time[3:5])
 	switch {
-	case m==0:
+	case m == 0:
 		return strings.Repeat("Cuckoo ", (h+11)%12) + "Cuckoo"
-	case m==30:
+	case m == 30:
 		return "Cuckoo"
 	case m%15 == 0:
 		return "Fizz Buzz"

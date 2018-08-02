@@ -1,4 +1,4 @@
-package foundatimentals
+package codewars
 
 /*A Cartesian coordinate system is a coordinate system that specifies each point uniquely in a plane by a pair of
 numerical coordinates, which are the signed distances to the point from two fixed perpendicular directed lines,
