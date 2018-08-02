@@ -1,11 +1,9 @@
 package main
 
 import (
-	"kata/foundatimentals"
 	"fmt"
 )
 
 func main() {
-	data := foundatimentals.DuplicateCount("abcdeaB11")
-	fmt.Println(data)
+	fmt.Println("good good study, day day up")
 }
