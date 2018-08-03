@@ -48,7 +48,7 @@ func isBadVersion(version int) bool {
 }
 
 // Time complexity : O(n). Assume that isBadVersion(version) takes constant time to check if a version is bad. It takes at most n−1 checks, therefore the overall time complexity is O(n).
-//Space complexity : O(1).
+// Space complexity : O(1).
 func firstBadVersion(n int) int {
 	for i := 1; i < n; i++ {
 		if isBadVersion(i) {
