@@ -6,14 +6,14 @@ type ListNode struct {
 	Next *ListNode
 }
 
-// Delete Node in a Linked List
+// Delete Node in a Linked List 删除链表中的节点
 // Time and space complexity are both O(1).
 func deleteNode(node *ListNode) {
 	node.Val = node.Next.Val
 	node.Next = node.Next.Next
 }
 
-// Remove Nth Node From End of List
+// Remove Nth Node From End of List 删除链表的倒数第N个节点
 // Time complexity : O(L).
 // The algorithm makes two traversal of the list, first to calculate list length LL and second to find the (L−n) th node. There are 2L-n operations and time complexity is O(L).
 // Space complexity : O(1). We only used constant extra space.
@@ -63,7 +63,7 @@ func removeNthFromEnd2(head *ListNode, n int) *ListNode {
 	return dummy.Next
 }
 
-// Reverse Linked List
+// Reverse Linked List 反转链表
 // Time complexity : O(n). Assume that nn is the list's length, the time complexity is O(n).
 // Space complexity : O(1).
 func reverseList(head *ListNode) *ListNode {
@@ -79,8 +79,8 @@ func reverseList(head *ListNode) *ListNode {
 	return prev
 }
 
-// Time complexity : O(n). Assume that nn is the list's length, the time complexity is O(n).
-// Space complexity : O(n). The extra space comes from implicit stack space due to recursion. The recursion could go up to nn levels deep.
+// Time complexity : O(n). Assume that n is the list's length, the time complexity is O(n).
+// Space complexity : O(n). The extra space comes from implicit stack space due to recursion. The recursion could go up to n levels deep.
 func reverseList2(head *ListNode) *ListNode {
 	if head == nil || head.Next == nil {
 		return head
@@ -92,7 +92,7 @@ func reverseList2(head *ListNode) *ListNode {
 	return p
 }
 
-// Merge Two Sorted Lists
+// Merge Two Sorted Lists 合并两个有序链表
 func mergeTwoLists(l1 *ListNode, l2 *ListNode) *ListNode {
 	if l1 == nil {
 		return l2
@@ -111,7 +111,7 @@ func mergeTwoLists(l1 *ListNode, l2 *ListNode) *ListNode {
 	}
 }
 
-// Palindrome Linked List
+// Palindrome Linked List 回文链表
 func isPalindromeLinkedList(head *ListNode) bool {
 	var slowNext, slowPrev *ListNode
 	slow := head
@@ -140,7 +140,7 @@ func isPalindromeLinkedList(head *ListNode) bool {
 	return slowPrev == nil
 }
 
-// Linked List Cycle
+// Linked List Cycle 环形链表
 // 1.Use two pointers, walker and runner.
 // 2.walker moves step by step. runner moves two steps at time.
 // 3.if the Linked List has a cycle walker and runner will meet at some point.
