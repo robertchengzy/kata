@@ -5,7 +5,7 @@ import (
 	"strings"
 )
 
-// Reverse String
+// Reverse String 反转字符串
 func reverseString(s string) string {
 	r := []rune(s)
 	n := len(r)
@@ -25,26 +25,20 @@ func reverseString1(str string) string {
 	return string(result)
 }
 
-// Reverse Integer
+// Reverse Integer 颠倒整数
 // Time Complexity: O(log(x)). There are roughly log10(x) digits in xx.
 // Space Complexity: O(1).
 func reverseInteger(x int) int {
 	rev := 0
-	for {
-		if x == 0 {
-			break
-		}
-
+	for x != 0 {
 		pop := x % 10
 		x /= 10
 		if rev > math.MaxInt32/10 || (rev == math.MaxInt32/10 && pop > 7) {
 			return 0
 		}
-
 		if rev < math.MinInt32/10 || (rev == math.MinInt32/10 && pop < -8) {
 			return 0
 		}
-
 		rev = rev*10 + pop
 	}
 
@@ -62,7 +56,7 @@ func reverseInteger2(x int) int {
 	return out
 }
 
-// First Unique Character in a String
+// First Unique Character in a String 字符串中的第一个唯一字符
 func firstUniqChar(s string) int {
 	if len(s) == 1 {
 		return 0
@@ -110,7 +104,7 @@ func firstUniqChar2(s string) int {
 	return -1
 }
 
-// Valid Anagram
+// Valid Anagram 有效的字母异位词
 // Time complexity : O(n). Time complexity is O(n) because accessing the counter table is a constant time operation.
 // Space complexity : O(1). Although we do use extra space, the space complexity is O(1) because the table's size stays constant no matter how large nn is.
 func isAnagram(s string, t string) bool {
@@ -133,7 +127,7 @@ func isAnagram(s string, t string) bool {
 	return true
 }
 
-// Valid Palindrome
+// Valid Palindrome 验证回文字符串
 func isPalindrome(s string) bool {
 	if s == "" {
 		return true
@@ -195,7 +189,7 @@ func isPalindrome2(s string) bool {
 	return true
 }
 
-// String to Integer (atoi)
+// String to Integer (atoi) 字符串转整数（atoi）
 func myAtoi(str string) int {
 	res, sign, l, idx := 0, 1, len(str), 0
 
@@ -229,7 +223,7 @@ func myAtoi(str string) int {
 	return res * sign
 }
 
-// Implement strStr()
+// Implement strStr() 实现strStr()
 func strStr(haystack string, needle string) int {
 	haystackLen := len(haystack)
 	needleLen := len(needle)
@@ -249,7 +243,7 @@ func strStr(haystack string, needle string) int {
 	return -1
 }
 
-// Count and Say
+// Count and Say 数数并说
 func countAndSay(n int) string {
 	return memCountAndSay(n, map[int]string{})
 }
@@ -290,7 +284,7 @@ func count(s string) int {
 	return len(s)
 }
 
-// Longest Common Prefix
+// Longest Common Prefix 最长公共前缀
 // Time complexity : O(S), where S is the sum of all characters in all strings.
 // In the worst case all nz strings are the same. The algorithm compares the string S1 with the other strings [S2…Sn]
 // There are S character comparisons, where S is the sum of all characters in the input array.
