@@ -250,7 +250,7 @@ func intersect(nums1 []int, nums2 []int) []int {
 	return res
 }
 
-// Plus One 两个数组的交集 II
+// Plus One 加一
 func plusOne(digits []int) []int {
 	length := len(digits)
 	for i := length - 1; i >= 0; i-- {
