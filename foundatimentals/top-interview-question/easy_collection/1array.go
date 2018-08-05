@@ -133,11 +133,31 @@ func rotate3(nums []int, k int) {
 
 func reverse(nums []int, start, end int) {
 	for start < end {
-		temp := nums[start]
-		nums[start] = nums[end]
-		nums[end] = temp
+		nums[start], nums[end] = nums[end], nums[start]
 		start++
 		end--
+	}
+}
+
+func rotate4(nums []int, k int) {
+	if len(nums) == 0 {
+		return
+	}
+
+	var i int
+	temp := nums[0]
+	start := 0
+	for count := 0; count < len(nums); count++ {
+		next := (i + k) % len(nums)
+		nums[next], temp = temp, nums[next]
+
+		if start == next && count+1 < len(nums) {
+			start++
+			i = start
+			temp = nums[i]
+		} else {
+			i = next
+		}
 	}
 }
 
