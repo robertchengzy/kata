@@ -4,7 +4,7 @@ import (
 	"sort"
 )
 
-// Remove Duplicates from Sorted Array
+// Remove Duplicates from Sorted Array 从排序数组中删除重复项
 // Time complexity : O(n). Assume that nn is the length of array. Each of i and j traverses at most n steps.
 // Space complexity : O(1).
 func removeDuplicates(nums []int) int {
@@ -38,7 +38,7 @@ func removeDuplicates2(nums []int) int {
 	return index
 }
 
-// Best Time to Buy and Sell Stock II
+// Best Time to Buy and Sell Stock II 买卖股票的最佳时机 II
 // Time complexity : O(n). Single pass.
 // Space complexity: O(1). Constant space needed.
 func maxProfit(prices []int) int {
@@ -71,7 +71,7 @@ func maxProfit2(prices []int) int {
 	return profit
 }
 
-// Rotate Array
+// Rotate Array 旋转数组
 // Time complexity : O(n*k). All the numbers are shifted by one step(O(n)) k times(O(k)).
 // Space complexity : O(1). No extra space is used.
 func rotate(nums []int, k int) {
@@ -141,7 +141,7 @@ func reverse(nums []int, start, end int) {
 	}
 }
 
-// Contains Duplicate
+// Contains Duplicate 存在重复
 // Time complexity : O(n^2). In the worst case, there are n*(n+1)/2 pairs of integers to check. Therefore, the time complexity is O(n^2)
 // Space complexity : O(1). We only used constant extra space.
 func containsDuplicate(nums []int) bool {
@@ -182,7 +182,7 @@ func containsDuplicate3(nums []int) bool {
 	return false
 }
 
-// Single Number
+// Single Number 只出现一次的数字
 // Time complexity : O(n⋅1)=O(n).
 // Space complexity : O(n).
 func singleNumber(nums []int) int {
@@ -214,7 +214,7 @@ func singleNumber2(nums []int) int {
 	return result
 }
 
-// Intersection of Two Arrays II
+// Intersection of Two Arrays II 两个数组的交集 II
 func intersect(nums1 []int, nums2 []int) []int {
 	dict, res := make(map[int]int), make([]int, 0, len(nums2))
 	for _, v := range nums1 {
@@ -230,7 +230,7 @@ func intersect(nums1 []int, nums2 []int) []int {
 	return res
 }
 
-// Plus One
+// Plus One 两个数组的交集 II
 func plusOne(digits []int) []int {
 	length := len(digits)
 	for i := length - 1; i >= 0; i-- {
@@ -247,7 +247,7 @@ func plusOne(digits []int) []int {
 	return a
 }
 
-// Move Zeroes
+// Move Zeroes 移动零
 func moveZeroes(nums []int) {
 	for i := 0; i < len(nums); i++ {
 		for j := i + 1; j < len(nums); j++ {
@@ -287,7 +287,7 @@ func moveZeroes3(nums []int) {
 	}
 }
 
-// Two Sum
+// Two Sum 两数之和
 // Time complexity : O(n^2). For each element, we try to find its complement by looping through the rest of array which takes O(n) time. Therefore, the time complexity is O(n^2).
 //Space complexity : O(1).
 func twoSum(nums []int, target int) []int {
@@ -317,7 +317,7 @@ func twoSum2(nums []int, target int) []int {
 	return nil
 }
 
-// Valid Sudoku
+// Valid Sudoku 有效的数独
 func isValidSudoku(board [][]byte) bool {
 	for i := 0; i < 9; i++ {
 		dataRow := make(map[byte]int)
@@ -385,7 +385,7 @@ func isValidSudoku2(board [][]byte) bool {
 	return true
 }
 
-// Rotate Image
+// Rotate Image 旋转图像
 func rotateMatrix(matrix [][]int) {
 	l := len(matrix)
 	for i := 0; i < l; i++ {
