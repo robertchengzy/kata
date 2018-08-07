@@ -6,7 +6,7 @@
 
 3. 内存分配和垃圾回收
 
-4. goroutine MPG 模型
+4. goroutine MPG 模型（抢占式调度）
 
 5. channel CSP 模型
 
