@@ -6,8 +6,6 @@ https://www.zhipin.com/
 
 https://www.lintcode.com/
 
-https://www.lintcode.com/
-
 https://studygolang.com/
 
 https://www.zhihu.com/
