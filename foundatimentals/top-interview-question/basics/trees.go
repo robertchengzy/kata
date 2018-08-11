@@ -3,6 +3,7 @@ package basics
 import (
 	"fmt"
 	"strconv"
+	"container/list"
 )
 
 type TreeNode struct {
@@ -11,55 +12,82 @@ type TreeNode struct {
 	Right *TreeNode
 }
 
-//  先序遍历二叉树（递归）
-func preOrderRecursion(root *TreeNode) {
-	fmt.Print(strconv.Itoa(root.Val) + " ")
-	if root.Left != nil {
-		preOrderRecursion(root.Left)
+// Binary Tree Preorder Traversal 二叉树的前序遍历
+/*
+
+*/
+func preorderTraversal(root *TreeNode) []int {
+	pre := make([]int, 0)
+	if root == nil {
+		return pre
 	}
-	if root.Right != nil {
-		preOrderRecursion(root.Right)
-	}
+	pre = append(pre, root.Val)
+	pre = append(pre, preorderTraversal(root.Left)...)
+	pre = append(pre, preorderTraversal(root.Right)...)
+	return pre
 }
 
-// 中序遍历二叉树（递归）
-func inOrderRecursion(root *TreeNode) {
-	if root.Left != nil {
-		inOrderRecursion(root.Left)
-	}
-	fmt.Print(strconv.Itoa(root.Val) + " ")
-	if root.Right != nil {
-		inOrderRecursion(root.Right)
-	}
+func preorderTraversal2(root *TreeNode) []int {
+	pre := make([]int, 0)
+	preHelper(root, &pre)
+	return pre
 }
 
-// 后序遍历二叉树（递归）
-func postOrderRecursion(root *TreeNode) {
-	if root.Left != nil {
-		postOrderRecursion(root.Left)
+func preHelper(root *TreeNode, pre *[]int) {
+	if root == nil {
+		return
 	}
-	if root.Right != nil {
-		postOrderRecursion(root.Right)
+	*pre = append(*pre, root.Val)
+	preHelper(root.Left, pre)
+	preHelper(root.Right, pre)
+}
+
+func preorderTraversal3(root *TreeNode) []int {
+	res := make([]int, 0)
+	if root != nil {
+		return res
 	}
-	fmt.Print(strconv.Itoa(root.Val) + " ")
+
+	stack := list.New()
+	stack.PushBack(root)
+	for stack.Len() > 0 {
+		top := stack.Back()
+		topNode := top.Value.(*TreeNode)
+		stack.Remove(top)
+
+		res = append(res, topNode.Val)
+
+		if topNode.Right != nil {
+			stack.PushBack(topNode.Right)
+		}
+		if topNode.Left != nil {
+			stack.PushBack(topNode.Left)
+		}
+	}
+	return res
 }
 
 // 先序遍历二叉树（非递归）
-func preOrderNoRecursion(root *TreeNode) {
+func preOrderNoRecursion(root *TreeNode) []int {
+	res := make([]int, 0)
+	if root == nil {
+		return res
+	}
 	stack := make([]*TreeNode, 0)
 	stack = append(stack)
 	for len(stack) > 0 {
 		curNode := stack[len(stack)-1]
+		res = append(res, curNode.Val)
 		if curNode.Right != nil {
 			stack = append(stack, curNode.Right)
 			stack = stack[:len(stack)-1]
 		}
-
 		if curNode.Left != nil {
 			stack = append(stack, curNode.Left)
 			stack = stack[:len(stack)-1]
 		}
 	}
+	return res
 }
 
 // 中序遍历二叉树（非递归）
