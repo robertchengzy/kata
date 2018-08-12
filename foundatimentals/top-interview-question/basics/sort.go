@@ -1,6 +1,17 @@
 package basics
 
-import "fmt"
+/*
+	1.基于比较的排序算法:
+		BUB - 冒泡排序,
+		SEL - 选择排序,
+		INS - 插入排序, (O(N^2) 基于比较的排序算法)
+		MER - 归并排序 (递归实现),
+		QUI - 快速排序 (递归实现),
+		R-Q - 随机快速排序 (递归实现).
+	2.不基于比较的排序算法:
+		COU - 计数排序,
+		RAD - 基数排序.(O（N log N）)
+*/
 
 // 冒泡排序思想：从前到后，依次两两比较，两层循环，一层控制比较趟数，一层控制前后两两比较
 func sortByBubble(s []int64) {
@@ -25,7 +36,7 @@ func sortBySelect(s []int64) {
 }
 
 // 插入排序：从后面乱序中，依次取出一个然后插入到前面排序的位置，
-func sortByInsert(s []int64) {
+func SortByInsert(s []int64) {
 	for i := 1; i < len(s); i++ { //i控制后面乱序和前面顺序的分界点，i控制分界点的移动
 		if s[i-1] > s[i] { //判断相邻的位置是否大小顺序正确，否则就要找到正确的位置
 			for j := i - 1; j >= 0 && s[j] > s[j+1]; j-- { //j控制位置的移动
@@ -33,7 +44,6 @@ func sortByInsert(s []int64) {
 			}
 		}
 	}
-	fmt.Println(s)
 }
 
 // 快速排序
@@ -61,7 +71,7 @@ func partition(s []int64, low, high int64) int64 {
 	//分别控制两个点，一个从前往后遍历，一个从后往前遍历
 	//假设我们每次将序列中的第一个元素作为定位排序的目标
 	tempValue := s[low] //哨兵
-	for low < high {    //当两边相遇时，结束本趟比较，直到low和high相遇时本趟排序结束
+	for low < high { //当两边相遇时，结束本趟比较，直到low和high相遇时本趟排序结束
 		for s[high] > tempValue && low < high { //从后往前遍历，找比哨兵小的数
 			high--
 		}
@@ -71,8 +81,50 @@ func partition(s []int64, low, high int64) int64 {
 			low++
 		}
 		s[low], tempValue = tempValue, s[low] //遇到比哨兵大的，就暂停，进行交换
-		fmt.Println(s)
 	}
 
 	return low //返回本次排序的能够确定最终位置的元素位置
+}
+
+// 归并排序
+func merge(a []int, low, mid, high int) {
+	n := high - low + 1
+	tmp := make([]int, n)
+	left, right, tmpIdx := low, mid+1, 0
+	for left <= mid && right <= high {
+		if a[left] <= a[right] {
+			tmp[tmpIdx] = a[left]
+			left++
+		} else {
+			tmp[tmpIdx] = a[right]
+			right++
+		}
+		tmpIdx++
+	}
+
+	for left <= mid {
+		tmp[tmpIdx] = a[left]
+		tmpIdx++
+		left++
+	}
+
+	for right <= high {
+		tmp[tmpIdx] = a[right]
+		tmpIdx++
+		right++
+	}
+
+	for k := 0; k < n; k++ {
+		a[low+k] = tmp[k]
+	}
+}
+
+func MergeSort(a []int, low, high int) {
+	// 要排序的数组是 a[low..high]
+	if low < high {
+		mid := (low + high) / 2
+		MergeSort(a, low, mid)    // 分成一半
+		MergeSort(a, mid+1, high) // 递归地将它们排序
+		merge(a, low, mid, high)  // 解决: 归并子程序
+	}
 }
