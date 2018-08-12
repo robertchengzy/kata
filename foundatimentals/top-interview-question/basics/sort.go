@@ -58,20 +58,34 @@ func SortByInsert(s []int64) {
 	7.直到low和high相遇，停止循环，返回low的位置，即下次的一分为二时使用的分界点
 */
 
-func quickSort(s []int64, low, high int64) { //start起始点，end终止点
+func QuickSort(a []int64, low, high int64) { // start起始点，end终止点
 	if low < high {
-		flag := partition(s, low, high) //把切片一分为二，分别对两部分进行递归排序
-		quickSort(s, low, flag-1)       //低的部分进行排序
-		quickSort(s, flag+1, high)      //高的部分进行排序
+		flag := partition(a, low, high) //把切片一分为二，分别对两部分进行递归排序 O(N)
+		// a[low..high] ~> a[low..m–1], pivot, a[m+1..high]
+		QuickSort(a, low, flag-1) // 递归地将左子阵列排序
+		// a[m] = pivot 在分区后就被排序好了
+		QuickSort(a, flag+1, high) // 然后将右子阵列排序
 	}
-
 }
 
-func partition(s []int64, low, high int64) int64 {
+func partition(a []int64, low, high int64) int64 {
+	p := a[low] // p 是枢纽
+	m := low    // S1 和 S2 一开始是空的
+	for k := low + 1; k <= high; k++ {
+		if a[k] < p {
+			m++
+			a[k], a[m] = a[m], a[k]
+		} // 注意：在情况1的时候我们什么不做: a[k] >= p
+	}
+	a[low], a[m] = a[m], a[low]
+	return m
+}
+
+func partition2(s []int64, low, high int64) int64 {
 	//分别控制两个点，一个从前往后遍历，一个从后往前遍历
 	//假设我们每次将序列中的第一个元素作为定位排序的目标
 	tempValue := s[low] //哨兵
-	for low < high { //当两边相遇时，结束本趟比较，直到low和high相遇时本趟排序结束
+	for low < high {    //当两边相遇时，结束本趟比较，直到low和high相遇时本趟排序结束
 		for s[high] > tempValue && low < high { //从后往前遍历，找比哨兵小的数
 			high--
 		}
@@ -86,11 +100,13 @@ func partition(s []int64, low, high int64) int64 {
 	return low //返回本次排序的能够确定最终位置的元素位置
 }
 
-// 归并排序
+// 自顶向下的归并排序
 func merge(a []int, low, mid, high int) {
+	// subarray1 = a[low..mid], subarray2 = a[mid+1..high], both sorted
 	n := high - low + 1
 	tmp := make([]int, n)
 	left, right, tmpIdx := low, mid+1, 0
+	// 归并
 	for left <= mid && right <= high {
 		if a[left] <= a[right] {
 			tmp[tmpIdx] = a[left]
@@ -101,30 +117,47 @@ func merge(a []int, low, mid, high int) {
 		}
 		tmpIdx++
 	}
-
+	// leftover, if any
 	for left <= mid {
 		tmp[tmpIdx] = a[left]
 		tmpIdx++
 		left++
 	}
-
+	// leftover, if any
 	for right <= high {
 		tmp[tmpIdx] = a[right]
 		tmpIdx++
 		right++
 	}
-
+	// copy back
 	for k := 0; k < n; k++ {
 		a[low+k] = tmp[k]
 	}
 }
 
-func MergeSort(a []int, low, high int) {
+func mergeSort(a []int, low, high int) {
 	// 要排序的数组是 a[low..high]
-	if low < high {
+	if low < high { // base case: low >= high (0 or 1 item)
 		mid := (low + high) / 2
-		MergeSort(a, low, mid)    // 分成一半
-		MergeSort(a, mid+1, high) // 递归地将它们排序
+		mergeSort(a, low, mid)    // 分成一半
+		mergeSort(a, mid+1, high) // 递归地将它们排序
 		merge(a, low, mid, high)  // 解决: 归并子程序
 	}
+}
+
+// 自底向上归并排序
+func MergeSortDownToUp(s []int) {
+	n := len(s)
+	for sz := 1; sz < n; sz *= 2 {
+		for i := 0; i < n-sz; i += 2 * sz {
+			merge(s, i, i+sz-1, min(i+2*sz-1, n-1))
+		}
+	}
+}
+
+func min(i, j int) int {
+	if j < i {
+		return j
+	}
+	return i
 }
