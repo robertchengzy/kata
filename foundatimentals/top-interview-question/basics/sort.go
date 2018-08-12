@@ -103,8 +103,8 @@ func partition2(s []int64, low, high int64) int64 {
 // 自顶向下的归并排序
 func merge(a []int, low, mid, high int) {
 	// subarray1 = a[low..mid], subarray2 = a[mid+1..high], both sorted
-	n := high - low + 1
-	tmp := make([]int, n)
+	length := high - low + 1
+	tmp := make([]int, length)
 	left, right, tmpIdx := low, mid+1, 0
 	// 归并
 	for left <= mid && right <= high {
@@ -130,7 +130,7 @@ func merge(a []int, low, mid, high int) {
 		right++
 	}
 	// copy back
-	for k := 0; k < n; k++ {
+	for k := 0; k < length; k++ {
 		a[low+k] = tmp[k]
 	}
 }
