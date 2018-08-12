@@ -44,7 +44,7 @@ func preHelper(root *TreeNode, pre *[]int) {
 
 func preorderTraversal3(root *TreeNode) []int {
 	res := make([]int, 0)
-	if root != nil {
+	if root == nil {
 		return res
 	}
 
@@ -74,17 +74,16 @@ func preOrderNoRecursion(root *TreeNode) []int {
 		return res
 	}
 	stack := make([]*TreeNode, 0)
-	stack = append(stack)
+	stack = append(stack, root)
 	for len(stack) > 0 {
 		curNode := stack[len(stack)-1]
+		stack = stack[0:len(stack)-1]
 		res = append(res, curNode.Val)
 		if curNode.Right != nil {
 			stack = append(stack, curNode.Right)
-			stack = stack[:len(stack)-1]
 		}
 		if curNode.Left != nil {
 			stack = append(stack, curNode.Left)
-			stack = stack[:len(stack)-1]
 		}
 	}
 	return res
