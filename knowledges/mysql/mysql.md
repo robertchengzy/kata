@@ -135,5 +135,4 @@ SHOW VARIABLES LIKE '%optimizer_trace%';
  
 #执行所需sql后，查看该表信息即可看到详细的执行过程
 SELECT * FROM `information_schema`.`OPTIMIZER_TRACE`;
-
 ```
