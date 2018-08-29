@@ -1,4 +1,4 @@
-package tumblr
+package help
 
 import "encoding/xml"
 
@@ -18,4 +18,3 @@ type VideoPost struct {
 	XMLName     xml.Name `xml:"post"`
 	VideoPlayer string   `xml:"video-player"`
 }
-

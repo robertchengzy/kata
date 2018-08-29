@@ -1,12 +1,12 @@
-package tumblr
+package help
 
 import (
 	"encoding/xml"
-	"fmt"
-	"strconv"
 	"errors"
+	"fmt"
 	"net/http"
 	"os"
+	"strconv"
 )
 
 type PhotoTumblr struct {

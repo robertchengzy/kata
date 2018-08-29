@@ -2,19 +2,20 @@ package main
 
 import (
 	"fmt"
-	"kata/project/spider"
 	"time"
+
+	"kata/project/spider/tumblr/help"
 )
 
 func main() {
 	imgUrlCh := make(chan string, 5)
-	errInfoCh := make(chan tumblr.ErrorInfo, 10000)
+	errInfoCh := make(chan help.ErrorInfo, 10000)
 	for worker := 1; worker <= 5; worker++ {
-		go tumblr.DownloadUrl(imgUrlCh, errInfoCh)
+		go help.DownloadUrl(imgUrlCh, errInfoCh)
 	}
 
 	fmt.Println("start")
-	imgUrls, err := tumblr.GetTumblrUrl("-", tumblr.APIPhoto, 0, 800)
+	imgUrls, err := help.GetTumblrUrl("-", help.APIPhoto, 0, 800)
 	if err != nil {
 		fmt.Printf("GetTumblrUrl failed [%v]\n", err)
 		return

@@ -1,17 +1,17 @@
-package tumblr
+package help
 
 import (
-	"time"
+	"errors"
 	"fmt"
-	"os"
 	"io"
-	"strings"
+	"net/http"
+	"net/url"
+	"os"
 	"path"
 	"runtime"
-	"net/url"
-	"net/http"
+	"strings"
 	"sync/atomic"
-	"errors"
+	"time"
 )
 
 var DownloadDir string
