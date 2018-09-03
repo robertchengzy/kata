@@ -12,4 +12,4 @@ cd $GOPATH/src/
 
 go install google.golang.org/grpc
 
-protoc --go_out=. *.proto
+protoc --go_out=plugins=grpc:. *.proto 
