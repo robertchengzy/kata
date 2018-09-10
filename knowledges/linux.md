@@ -55,4 +55,6 @@ LAST_ACK：等待所有分组死掉
 
 ##### ab -n 1000 -c 1000 -T http://github.com
 
-#### ln -s /usr/bin/ffmpeg /usr/local/bin/ffmpeg
+##### ln -s /usr/bin/ffmpeg /usr/local/bin/ffmpeg
+
+##### sudo lsof -p [进程号] | wc -l
