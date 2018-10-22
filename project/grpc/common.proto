@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+package ecprotobuf;
+
+enum COMMAND {
+    CMD_HELLO = 0;
+}
+
+message Hello {
+    string name = 1;
+}
