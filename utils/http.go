@@ -1,17 +1,17 @@
 package utils
 
 import (
-	"io/ioutil"
-	"net/http"
-	"errors"
-	"strconv"
 	"bytes"
-	"mime/multipart"
 	"encoding/json"
-	"os"
+	"errors"
 	"io"
-	"time"
+	"io/ioutil"
+	"mime/multipart"
 	"net"
+	"net/http"
+	"os"
+	"strconv"
+	"time"
 )
 
 var (

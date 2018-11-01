@@ -1,9 +1,8 @@
 package redis
 
 import (
-	"time"
-	"github.com/satori/go.uuid"
 	"menteslibres.net/gosexy/redis"
+	"time"
 )
 
 // redis 获取锁和释放锁

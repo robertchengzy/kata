@@ -1,46 +1,50 @@
 package main
 
 import (
-	"fmt"
 	"bytes"
-	"sync"
-	"time"
+	"fmt"
 	"os"
 	"path/filepath"
+	"sync"
+	"time"
 )
 
 func main22() {
 	path := []byte("AAAA/BBBBBBBBB")
-	sepIndex := bytes.IndexByte(path,'/')
+	sepIndex := bytes.IndexByte(path, '/')
 	dir1 := path[:sepIndex:sepIndex] //full slice expression
 	dir2 := path[sepIndex+1:]
-	fmt.Println("dir1 =>",string(dir1)) //prints: dir1 => AAAA
-	fmt.Println("dir2 =>",string(dir2)) //prints: dir2 => BBBBBBBBB
+	fmt.Println("dir1 =>", string(dir1)) //prints: dir1 => AAAA
+	fmt.Println("dir2 =>", string(dir2)) //prints: dir2 => BBBBBBBBB
 
-	dir1 = append(dir1,"suffix"...)
-	path = bytes.Join([][]byte{dir1,dir2},[]byte{'/'})
+	dir1 = append(dir1, "suffix"...)
+	path = bytes.Join([][]byte{dir1, dir2}, []byte{'/'})
 
-	fmt.Println("dir1 =>",string(dir1)) //prints: dir1 => AAAAsuffix
-	fmt.Println("dir2 =>",string(dir2)) //prints: dir2 => BBBBBBBBB (ok now)
+	fmt.Println("dir1 =>", string(dir1)) //prints: dir1 => AAAAsuffix
+	fmt.Println("dir2 =>", string(dir2)) //prints: dir2 => BBBBBBBBB (ok now)
 
-	fmt.Println("new path =>",string(path))
+	fmt.Println("new path =>", string(path))
 }
 
 func main3() {
-	s1 := []int{1,2,3}
-	fmt.Println(len(s1),cap(s1),s1) //prints 3 3 [1 2 3]
+	s1 := []int{1, 2, 3}
+	fmt.Println(len(s1), cap(s1), s1) //prints 3 3 [1 2 3]
 	s2 := s1[1:]
-	fmt.Println(len(s2),cap(s2),s2) //prints 2 2 [2 3]
+	fmt.Println(len(s2), cap(s2), s2) //prints 2 2 [2 3]
 
-	for i := range s2 { s2[i] += 20 }
+	for i := range s2 {
+		s2[i] += 20
+	}
 
 	//still referencing the same array
 	fmt.Println(s1) //prints [1 22 23]
 	fmt.Println(s2) //prints [22 23]
 
-	s2 = append(s2,4)
+	s2 = append(s2, 4)
 
-	for i := range s2 { s2[i] += 10 }
+	for i := range s2 {
+		s2[i] += 10
+	}
 
 	//s1 is now "stale"
 	fmt.Println(s1) //prints [1 22 23]
@@ -61,7 +65,7 @@ type myLocker1 struct {
 
 func main5() {
 	var lock myLocker1
-	lock.Lock() //ok
+	lock.Lock()   //ok
 	lock.Unlock() //ok
 }
 
@@ -69,7 +73,7 @@ type myLocker2 sync.Locker
 
 func main6() {
 	var lock myLocker2 = new(sync.Mutex)
-	lock.Lock() //ok
+	lock.Lock()   //ok
 	lock.Unlock() //ok
 }
 
@@ -91,9 +95,9 @@ retry:
 }
 
 func main() {
-	data := []string{"one","two","three"}
+	data := []string{"one", "two", "three"}
 
-	for _,v := range data {
+	for _, v := range data {
 		fmt.Println(1, v)
 		go func() {
 			fmt.Println(v)
@@ -116,9 +120,9 @@ func (p *field) print() {
 }
 
 func main9() {
-	data := []*field{{"one"},{"two"},{"three"}}
+	data := []*field{{"one"}, {"two"}, {"three"}}
 
-	for _,v := range data {
+	for _, v := range data {
 		v := v
 		go v.print()
 	}
@@ -129,7 +133,7 @@ func main9() {
 func main10() {
 	var i int = 1
 
-	defer fmt.Println("result =>",func() int { return i * 2 }())
+	defer fmt.Println("result =>", func() int { return i * 2 }())
 	i++
 	//prints: result => 2 (not ok if you expected 4)
 }
@@ -137,7 +141,7 @@ func main10() {
 func main1111() {
 	var s []*string
 	for i := 0; i < 10; i++ {
-		func () {
+		func() {
 			defer fmt.Println("test", i)
 			fmt.Println("testz")
 		}()
@@ -155,7 +159,7 @@ func main111() {
 	}
 
 	start, err := os.Stat(os.Args[1])
-	if err != nil || !start.IsDir(){
+	if err != nil || !start.IsDir() {
 		os.Exit(-1)
 	}
 
@@ -169,15 +173,15 @@ func main111() {
 			return nil
 		}
 
-		targets = append(targets,fpath)
+		targets = append(targets, fpath)
 		return nil
 	})
 
-	for _,target := range targets {
+	for _, target := range targets {
 		func() {
 			f, err := os.Open(target)
 			if err != nil {
-				fmt.Println("bad target:",target,"error:",err)
+				fmt.Println("bad target:", target, "error:", err)
 				return
 			}
 			defer f.Close() //ok

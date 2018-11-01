@@ -1,9 +1,9 @@
 package main
 
 import (
+	"fmt"
 	// "strconv"
 	"sync"
-	"fmt"
 	//"time"
 	"math/rand"
 )

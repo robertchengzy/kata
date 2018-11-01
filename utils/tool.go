@@ -1,15 +1,15 @@
 package utils
 
 import (
-	"regexp"
-	"reflect"
-	"fmt"
 	"errors"
+	"fmt"
 	"math"
-	"unicode/utf8"
-	"strings"
+	"reflect"
+	"regexp"
 	"strconv"
+	"strings"
 	"time"
+	"unicode/utf8"
 )
 
 // 文件名过滤器

@@ -1,8 +1,8 @@
 package timeoutexit
 
 import (
-	"time"
 	"testing"
+	"time"
 )
 
 func shutdownMaker(processTm int) func(time.Duration) error {

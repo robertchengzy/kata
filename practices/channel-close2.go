@@ -1,11 +1,11 @@
 package main
 
 import (
-	"time"
-	"math/rand"
-	"sync"
 	"log"
+	"math/rand"
 	"strconv"
+	"sync"
+	"time"
 )
 
 //M receivers, one sender, the sender says "no more sends" by closing the data channel
@@ -79,7 +79,7 @@ func main2() {
 				// as early as possible. In fact, it is not essential
 				// for this example, so it can be omitted.
 				select {
-				case <- stopCh:
+				case <-stopCh:
 					return
 				default:
 				}
@@ -90,7 +90,7 @@ func main2() {
 				// But this is acceptable, so the first select
 				// can be omitted.
 				select {
-				case <- stopCh:
+				case <-stopCh:
 					return
 				case dataCh <- rand.Intn(MaxRandomNumber):
 				}
@@ -150,7 +150,7 @@ func main() {
 
 	// moderator
 	go func() {
-		stoppedBy = <- toStop
+		stoppedBy = <-toStop
 		close(stopCh)
 	}()
 
@@ -175,7 +175,7 @@ func main() {
 				// be optimized as a try-receive operation by the
 				// official Go compiler.
 				select {
-				case <- stopCh:
+				case <-stopCh:
 					return
 				default:
 				}
@@ -186,7 +186,7 @@ func main() {
 				// dataCh is also unblocked.
 				// This is why the first select block is needed.
 				select {
-				case <- stopCh:
+				case <-stopCh:
 					return
 				case dataCh <- value:
 				}
@@ -203,7 +203,7 @@ func main() {
 				// Same as the sender goroutine, the first select here
 				// is to try to exit the goroutine as early as possible.
 				select {
-				case <- stopCh:
+				case <-stopCh:
 					return
 				default:
 				}
@@ -214,7 +214,7 @@ func main() {
 				// dataCh is also unblocked.
 				// This is why the first select block is needed.
 				select {
-				case <- stopCh:
+				case <-stopCh:
 					return
 				case value := <-dataCh:
 					if value == MaxRandomNumber-1 {

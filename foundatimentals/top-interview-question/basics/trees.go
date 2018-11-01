@@ -1,9 +1,9 @@
 package basics
 
 import (
+	"container/list"
 	"fmt"
 	"strconv"
-	"container/list"
 )
 
 type TreeNode struct {
@@ -15,7 +15,7 @@ type TreeNode struct {
 // Binary Tree Preorder Traversal 二叉树的前序遍历
 /*
 
-*/
+ */
 func preorderTraversal(root *TreeNode) []int {
 	pre := make([]int, 0)
 	if root == nil {
@@ -77,7 +77,7 @@ func preOrderNoRecursion(root *TreeNode) []int {
 	stack = append(stack, root)
 	for len(stack) > 0 {
 		curNode := stack[len(stack)-1]
-		stack = stack[0:len(stack)-1]
+		stack = stack[0 : len(stack)-1]
 		res = append(res, curNode.Val)
 		if curNode.Right != nil {
 			stack = append(stack, curNode.Right)

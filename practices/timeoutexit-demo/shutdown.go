@@ -1,9 +1,9 @@
 package timeoutexit
 
 import (
-	"time"
-	"sync"
 	"errors"
+	"sync"
+	"time"
 )
 
 type GracefullyShutdowner interface {
