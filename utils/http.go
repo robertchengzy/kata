@@ -87,20 +87,20 @@ func HttpGetJson(url string, v interface{}) error {
 
 // contentType application/json | application/x-www-form-urlencoded
 func HttpPost(url, contentType string, params interface{}) ([]byte, error) {
-	var params_bytes []byte
+	var paramsBytes []byte
 	var err error
 	if contentType == "application/json" {
-		params_bytes, err = json.Marshal(params)
+		paramsBytes, err = json.Marshal(params)
 		if err != nil {
 			return nil, err
 		}
 	}
 
 	if contentType == "application/x-www-form-urlencoded" {
-		params_bytes = []byte(params.(string))
+		paramsBytes = []byte(params.(string))
 	}
 
-	res, err := http.Post(url, contentType, bytes.NewReader(params_bytes))
+	res, err := http.Post(url, contentType, bytes.NewReader(paramsBytes))
 	if err != nil {
 		return nil, err
 	}
@@ -130,10 +130,12 @@ func PostFile(uri string, params map[string]string, paramName, fileName string, 
 	if err != nil {
 		return nil, err
 	}
-	part.Write(fileData)
 
-	err = writer.Close()
-	if err != nil {
+	if _, err := part.Write(fileData); err != nil {
+		return nil, err
+	}
+
+	if err := writer.Close(); err != nil {
 		return nil, err
 	}
 
@@ -157,6 +159,33 @@ func PostFile(uri string, params map[string]string, paramName, fileName string, 
 	}
 
 	data, err := ioutil.ReadAll(response.Body)
+	if err != nil {
+		return nil, err
+	}
+
+	return data, nil
+}
+
+func PostData(uri string, data []byte, header map[string]string) ([]byte, error) {
+	request, err := http.NewRequest("POST", uri, bytes.NewReader(data))
+
+	for key, val := range header {
+		request.Header.Set(key, val)
+	}
+
+	client := &http.Client{}
+	response, err := client.Do(request)
+
+	if err != nil {
+		return nil, err
+	}
+
+	defer response.Body.Close()
+	if response.StatusCode != http.StatusOK {
+		return nil, errors.New("response.StatusCode =" + strconv.Itoa(response.StatusCode))
+	}
+
+	data, err = ioutil.ReadAll(response.Body)
 	if err != nil {
 		return nil, err
 	}
