@@ -4,6 +4,7 @@ import (
 	"errors"
 	"fmt"
 	"math"
+	"math/rand"
 	"reflect"
 	"regexp"
 	"strconv"
@@ -175,4 +176,18 @@ func GetPointTime(t *time.Time) (*time.Time, error) {
 	t = new(time.Time)
 	err := t.UnmarshalText(nowBytes)
 	return t, err
+}
+
+func randInt64(min, max int64) int64 {
+	if min >= max || min == 0 || max == 0 {
+		return max
+	}
+	return rand.Int63n(max-min) + min
+}
+
+var letter = [...]string{"A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"}
+
+// 订单号
+func createVoiceId() string {
+	return time.Now().Format("20060102150405") + letter[randInt64(1, 25)] + letter[randInt64(1, 25)]
 }
