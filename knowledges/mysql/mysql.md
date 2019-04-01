@@ -138,3 +138,4 @@ SELECT * FROM `information_schema`.`OPTIMIZER_TRACE`;
 ```
 
 ##### explain extended sql; show warnings; 显示msyql优化后的执行语句
+##### SHOW TABLE STATUS [FROM db_name] [LIKE 'pattern'] 查看表信息
