@@ -191,3 +191,12 @@ var letter = [...]string{"A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", 
 func createVoiceId() string {
 	return time.Now().Format("20060102150405") + letter[randInt64(1, 25)] + letter[randInt64(1, 25)]
 }
+
+const (
+	regular = `^1([1-9])\d{9}$`
+)
+
+func ValidateMobile(mobileNum string) bool {
+	reg := regexp.MustCompile(regular)
+	return reg.MatchString(mobileNum)
+}
