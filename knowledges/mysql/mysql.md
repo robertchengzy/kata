@@ -83,9 +83,6 @@ SHOW STATUS LIKE 'hander_read%';
 ##### 查看字符集
 `SHOW VARIABLES WHERE variable_name LIKE 'character\_set\_%' OR variable_name LIKE 'collation%';`
 
-##### 查看表信息
-`show table status like 'table_name'`
-
 ##### 查询事务和锁等待的关系
 `SELECT
  	R.TRX_ID WAITING_TRX_ID,
@@ -138,4 +135,4 @@ SELECT * FROM `information_schema`.`OPTIMIZER_TRACE`;
 ```
 
 ##### explain extended sql; show warnings; 显示msyql优化后的执行语句
-##### SHOW TABLE STATUS [FROM db_name] [LIKE 'pattern'] 查看表信息
+##### SHOW TABLE STATUS [FROM db_name] NAME [LIKE 'pattern'] 查看表信息
