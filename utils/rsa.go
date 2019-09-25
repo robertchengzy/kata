@@ -19,12 +19,11 @@ func RsaEncryptNoPadding(cipherText string, publicKey []byte) (string, error) {
 		return "", errors.New("no public key")
 	}
 
-	pubInterface, err := x509.ParsePKIXPublicKey(block.Bytes)
+	pub, err := x509.ParsePKCS1PublicKey(block.Bytes)
 	if err != nil {
 		return "", err
 	}
 
-	pub := pubInterface.(*rsa.PublicKey)
 	encrypted := new(big.Int)
 	e := big.NewInt(int64(pub.E))
 	payload := new(big.Int).SetBytes([]byte(cipherText))
@@ -66,7 +65,7 @@ func RsaSignWithSha1(data string, privateKey []byte) (string, error) {
 		return "", err
 	}
 	h := sha1.New()
-	h.Write([]byte([]byte(data)))
+	h.Write([]byte(data))
 	hash := h.Sum(nil)
 	signature, err := rsa.SignPKCS1v15(rand.Reader, private, crypto.SHA1, hash[:])
 	if err != nil {

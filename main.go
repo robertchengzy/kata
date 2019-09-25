@@ -5,12 +5,10 @@ import (
 	"hash/crc32"
 	"io/ioutil"
 	"kata/utils"
-	"math"
-	"time"
 )
 
 func main() {
-	fmt.Println("good good study, day day up")
+	/*fmt.Println("good good study, day day up")
 	fmt.Println(HashCode("1234567889"))
 
 	fmt.Println(float64(1) / float64(3) * 10000)
@@ -20,9 +18,9 @@ func main() {
 	fmt.Println(data)
 
 	fmt.Println(time.Now().Add(time.Hour * 37))
-
-	prikey, _ := ioutil.ReadFile("prikey.pem")
-	pubkey, _ := ioutil.ReadFile("pubkey.pem")
+	*/
+	prikey, _ := ioutil.ReadFile("prikey_4gkaer.pem")
+	pubkey, _ := ioutil.ReadFile("pubkey_4gkaer.pem")
 
 	res, err := utils.RsaEncryptNoPadding("834882283", pubkey)
 	fmt.Println(res, err)
@@ -31,12 +29,12 @@ func main() {
 
 	fmt.Println(ress, err)
 
-	batch := int32(math.Ceil(float64(5000) / 3000))
+	/*batch := int32(math.Ceil(float64(5000) / 3000))
 	fmt.Println(batch)
 
 	var keywords []string
 	keywords = append(keywords, "123", "1234")
-	fmt.Println(keywords)
+	fmt.Println(keywords)*/
 }
 
 // 获取hashcode
