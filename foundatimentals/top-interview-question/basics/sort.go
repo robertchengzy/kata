@@ -53,8 +53,12 @@ func sortBySelect(s []int64) {
 func sortByInsert(s []int64) {
 	for i := 1; i < len(s); i++ { //i控制后面乱序和前面顺序的分界点，i控制分界点的移动
 		if s[i-1] > s[i] { //判断相邻的位置是否大小顺序正确，否则就要找到正确的位置
-			for j := i - 1; j >= 0 && s[j] > s[j+1]; j-- { //j控制位置的移动
-				s[j+1], s[j] = s[j], s[j+1] //以交换的方式做了简单的数据移动
+			for j := i - 1; j >= 0; j-- { //j控制位置的移动
+				if s[j] > s[j+1] {
+					s[j+1], s[j] = s[j], s[j+1] //以交换的方式做了简单的数据移动
+				} else {
+					break
+				}
 			}
 		}
 	}
