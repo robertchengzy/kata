@@ -3,6 +3,7 @@ package codewars
 import "math"
 
 // Maximum Subarray 最大子数组和
+// a := []int{13, -3, -25, 20, -3, -16, -23, 18, 20, -7, 12, -5, -22, 15, -4, 7}
 
 // 暴力求解法
 func FindMaxSubArray(a []int) (int, int, int) {
@@ -48,7 +49,7 @@ func findMaxCrossingSubArray(a []int, low, mid, high int) (int, int, int) {
 		}
 	}
 
-	return maxLeft, maxRight, maxLeft + maxRight
+	return maxLeft, maxRight, leftSum + rightSum
 }
 
 func FindMaximumSubArray(a []int, low, high int) (int, int, int) {
@@ -67,4 +68,32 @@ func FindMaximumSubArray(a []int, low, high int) (int, int, int) {
 			return crossLow, crossHigh, crossSum
 		}
 	}
+}
+
+/*
+	线性时间算法
+    最优方法，时间复杂度O（n）
+	和最大的子序列的第一个元素肯定是正数
+	因为元素有正有负，因此子序列的最大和一定大于0
+*/
+func MaxSubArray(a []int) (int, int, int) {
+	maxSum := math.MinInt64
+	curSum := 0
+	left, right := 0, 0
+
+	length := len(a)
+	for i := 0; i < length; i++ {
+		curSum += a[i]
+		if curSum > maxSum {
+			right = i
+			maxSum = curSum
+		}
+
+		if curSum < 0 {
+			left = i + 1
+			curSum = 0
+		}
+	}
+
+	return left, right, maxSum
 }
