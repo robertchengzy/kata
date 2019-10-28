@@ -187,3 +187,8 @@ func min(i, j int) int {
 	}
 	return i
 }
+
+// 计数排序 O(N)
+func CountingSort() {
+
+}

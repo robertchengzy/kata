@@ -97,3 +97,19 @@ func MaxSubArray(a []int) (int, int, int) {
 
 	return left, right, maxSum
 }
+
+func maxSubArray1(a []int) int {
+	ans := a[0]
+	sum := 0
+	for _, num := range a {
+		if sum > 0 {
+			sum += num
+		} else {
+			sum = num
+		}
+
+		ans = int(math.Max(float64(ans), float64(sum)))
+	}
+
+	return ans
+}
