@@ -58,3 +58,33 @@ func down(a []int, i0, n int) bool {
 
 	return i > i0
 }
+
+func up(a []int, j int) {
+	for {
+		i := (j - 1) / 2
+		if i == j || a[i] > a[j] {
+			break
+		}
+
+		a[i], a[j] = a[j], a[i]
+		j = i
+	}
+}
+
+func MaxHeapify(a []int, heapSize, i int) {
+	l := 2*i + 1
+	r := 2*i + 2
+	largest := i
+	if l <= heapSize && a[l] > a[i] {
+		largest = l
+	}
+
+	if r <= heapSize && a[r] > a[largest] {
+		largest = r
+	}
+
+	if largest != i {
+		a[i], a[largest] = a[largest], a[i]
+		MaxHeapify(a, heapSize, largest)
+	}
+}

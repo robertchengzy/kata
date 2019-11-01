@@ -10,7 +10,7 @@ package basics
 		R-Q - 随机快速排序 (递归实现). 分而治之
 	2.不基于比较的排序算法:
 		COU - 计数排序,
-		RAD - 基数排序.(O（N log N）)
+		RAD - 基数排序.(O(N)
 
 	计数排序
 	假设：如果要排序的项目是小范围的整数，我们可以计算每个整数（在这个小范围内）的出现频率，然后通过循环该小范围来按排序顺序输出项目。
@@ -188,7 +188,35 @@ func min(i, j int) int {
 	return i
 }
 
+// 堆排序 O(N*logN)
+func HeapSort(a []int) {
+	// 建堆
+	InitHeapSimple(a)
+	length := len(a)
+	heapSize := length - 1
+	for i := length - 1; i > 0; i-- {
+		a[0], a[i] = a[i], a[0]
+		heapSize = heapSize - 1
+		MaxHeapify(a, heapSize, 0)
+	}
+}
+
 // 计数排序 O(N)
-func CountingSort() {
+func CountingSort(a []int) {
+	length := len(a)
+	b := make([]int, length)
+	c := make([]int, length)
+	for i := 0; i < length; i++ {
+
+	}
+}
+
+// 基数排序 O(N)
+func RadixSort(a []int) {
+
+}
+
+// 桶排序 O(N)
+func BucketSort(a []int) {
 
 }
