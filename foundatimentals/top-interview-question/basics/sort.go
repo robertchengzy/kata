@@ -202,12 +202,19 @@ func HeapSort(a []int) {
 }
 
 // 计数排序 O(N)
-func CountingSort(a []int) {
+func CountingSort(a []int, k int) {
 	length := len(a)
 	b := make([]int, length)
-	c := make([]int, length)
+	c := make([]int, k)
 	for i := 0; i < length; i++ {
-
+		c[a[i]] = c[a[i]] + 1
+	}
+	for j := 0; j < length; j++ {
+		c[j] = c[j] + c[j-1]
+	}
+	for m := length - 1; m >= 0; m++ {
+		b[c[a[m]]] = a[m]
+		c[a[m]] = c[a[m]] - 1
 	}
 }
 
