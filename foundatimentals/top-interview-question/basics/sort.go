@@ -222,10 +222,40 @@ func CountingSort(a []int, k int) []int {
 
 // 基数排序 O(N)
 func RadixSort(a []int) {
-
+	max := GetMax(a)
+	length := len(a)
+	for i := 10; max%(i/10) != max; i = i * 10 {
+		// 创建十个桶
+		bucket := make([][]int, 10)
+		// 放入桶中
+		for j := 0; j < length; j++ {
+			num := a[j] / (i / 10) % 10
+			bucket[num] = append(bucket[num], a[j])
+		}
+		// 从桶中顺序取出
+		k := 0
+		for m := 0; m < 10; m++ {
+			bLength := len(bucket[m])
+			for n := 0; n < bLength; n++ {
+				a[k] = bucket[m][n]
+				k++
+			}
+		}
+	}
 }
 
 // 桶排序 O(N)
 func BucketSort(a []int) {
 
+}
+
+func GetMax(a []int) int {
+	max := a[0]
+	length := len(a)
+	for i := 1; i < length; i++ {
+		if a[i] > max {
+			max = a[i]
+		}
+	}
+	return max
 }
