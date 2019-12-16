@@ -196,5 +196,36 @@ func FindDiagonalOrder(matrix [][]int) []int {
 输出: [1,2,3,4,8,12,11,10,9,5,6,7]
 */
 func spiralOrder(matrix [][]int) []int {
+	row := len(matrix)
+	column := len(matrix[0])
+	data := make([]int, 0, row*column)
+	left, right, up, down := 0, column-1, 0, row-1
+	for {
+		// left to right
+		for i := left; i <= right; i++ {
+			data = append(data, matrix[up][i])
+		}
 
+		tempUp := up + 1
+		if tempUp >= down {
+			break
+		}
+
+		// up to down
+		for j := up; j <= down; j++ {
+			data = append(data, matrix[j][right])
+		}
+
+		// right to left
+		for m := right; m >= left; m++ {
+			data = append(data, matrix[down][m])
+		}
+
+		// down to up
+		for m := down; m >= up; m++ {
+			data = append(data, matrix[up][m])
+		}
+	}
+
+	return data
 }
