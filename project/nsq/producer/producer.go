@@ -19,7 +19,18 @@ func main() {
 
 	fmt.Printf("data [%v] [%v]", env, param)
 
-	nsqd := "192.168.1.51:4150"
+	nsqd := ""
+	switch env {
+	case "dev":
+		nsqd = "192.168.1.51:4150"
+	case "test":
+		nsqd = "10.0.200.168:4150"
+	case "pro":
+		nsqd = ""
+	default:
+		return
+	}
+
 	var err error
 	producer, err = nsq.NewProducer(nsqd, nsq.NewConfig())
 	if err != nil {
@@ -34,7 +45,7 @@ func main() {
 
 	for i := 0; i < 1; i++ {
 		data := `{"flexibleTaskRenew":` + param + `}`
-		err = producer.Publish("j_pp_phoneBill", []byte(data))
+		err = producer.Publish("j_pp_launch_flexible_task", []byte(data))
 		if err != nil {
 			log.Fatalln(err)
 		}
