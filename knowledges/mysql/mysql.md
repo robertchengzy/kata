@@ -136,3 +136,17 @@ SELECT * FROM `information_schema`.`OPTIMIZER_TRACE`;
 
 ##### explain extended sql; show warnings; 显示msyql优化后的执行语句
 ##### SHOW TABLE STATUS [FROM db_name] NAME [LIKE 'pattern'] 查看表信息
+
+##### group_concat
+```
+group_concat函数有长度限制
+
+查找当前数据库长度
+show variables like 'group_concat_max_len' 
+
+设置当前session的group_concat长度，其他session连接不受影响
+SET SESSION group_concat_max_len = 10240;
+
+设置全局group_concat长度
+SET GLOBAL group_concat_max_len = 10240
+```
