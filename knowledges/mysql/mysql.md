@@ -79,6 +79,7 @@ SHOW STATUS LIKE 'hander_read%';
 
 ##### 查看表生成的DDL
 `show create table table_name;`
+`show table status like 'table_name';`
 
 ##### 查看字符集
 `SHOW VARIABLES WHERE variable_name LIKE 'character\_set\_%' OR variable_name LIKE 'collation%';`
