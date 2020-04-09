@@ -1,21 +1,22 @@
 package redis
 
 import (
+	uuid "github.com/satori/go.uuid"
 	"menteslibres.net/gosexy/redis"
 	"time"
 )
 
 // redis 获取锁和释放锁
-// @param acquireTimeout 单位：纳秒
+// @param acquireTimeout 单位：秒
 // @param lockTimeout 单位：秒
 func AcquireLockWithTimeout(conn *redis.Client, lockName string, acquireTimeout, lockTimeout int64) string {
 	identifier := uuid.NewV4().String()
 	lockKey := "lock:" + lockName
 	lockExpire := uint64(lockTimeout)
 
-	end := time.Now().UnixNano() + acquireTimeout
+	end := time.Now().Unix() + acquireTimeout
 	for {
-		if time.Now().UnixNano() < end {
+		if time.Now().Unix() < end {
 			if boolLock, _ := conn.SetNX(lockKey, identifier); boolLock {
 				conn.Expire(lockKey, lockExpire)
 				return identifier
