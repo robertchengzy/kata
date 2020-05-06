@@ -200,3 +200,21 @@ func ValidateMobile(mobileNum string) bool {
 	reg := regexp.MustCompile(regular)
 	return reg.MatchString(mobileNum)
 }
+
+func GetLastCycle(startTimeStr, endTimeStr string) (string, string, error) {
+	startTime, err := time.Parse("2006-01-02", startTimeStr)
+	if err != nil {
+		return "", "", nil
+	}
+	endTime, err := time.Parse("2006-01-02", endTimeStr)
+	if err != nil {
+		return "", "", nil
+	}
+
+	banlance := endTime.Sub(startTime) / time.Hour / 24
+
+	lastStartTime := startTime.AddDate(0, 0, -int(banlance)-1)
+	lastEndTime := startTime.AddDate(0, 0, -1)
+
+	return lastStartTime.Format("2006-01-02"), lastEndTime.Format("2006-01-02"), nil
+}
