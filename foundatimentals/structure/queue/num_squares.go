@@ -13,7 +13,7 @@ package queue
 解释: 13 = 4 + 9.
 */
 
-func NumSquares(n int) int {
+func numSquares(n int) int {
 	max := 0
 	squareNums := make([]int, 0)
 	for i := 1; i*i <= n; i++ {

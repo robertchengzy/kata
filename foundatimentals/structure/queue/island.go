@@ -44,7 +44,7 @@ func numIslands(grid [][]byte) int {
 	for i := 0; i < row; i++ {
 		for j := 0; j < col; j++ {
 			if grid[i][j] == '1' {
-				BFS(grid, i, j)
+				bfs(grid, i, j)
 				count++
 			}
 		}
@@ -52,7 +52,7 @@ func numIslands(grid [][]byte) int {
 	return count
 }
 
-func BFS(grid [][]byte, i, j int) {
+func bfs(grid [][]byte, i, j int) {
 	queue := make([]int, 0)
 	queue = append(queue, i, j)
 	grid[i][j] = '0'
