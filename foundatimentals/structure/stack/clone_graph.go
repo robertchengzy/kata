@@ -34,9 +34,26 @@ class Node {
 输出：[[2],[1]]
 
 提示：
-节点数不超过 100 。
-每个节点值 Node.val 都是唯一的，1 <= Node.val <= 100。
-无向图是一个简单图，这意味着图中没有重复的边，也没有自环。
-由于图是无向的，如果节点 p 是节点 q 的邻居，那么节点 q 也必须是节点 p 的邻居。
-图是连通图，你可以从给定节点访问到所有节点。
+1.节点数不超过 100 。
+2.每个节点值 Node.val 都是唯一的，1 <= Node.val <= 100。
+3.无向图是一个简单图，这意味着图中没有重复的边，也没有自环。
+4.由于图是无向的，如果节点 p 是节点 q 的邻居，那么节点 q 也必须是节点 p 的邻居。
+5.图是连通图，你可以从给定节点访问到所有节点。
 */
+
+/**
+ * Definition for a Node.
+ * type Node struct {
+ *     Val int
+ *     Neighbors []*Node
+ * }
+ */
+
+type Node struct {
+	val       int
+	neighbors []Node
+}
+
+func cloneGraph(node *Node) *Node {
+
+}
