@@ -2,14 +2,14 @@ package stack
 
 /*
 克隆图
-给你无向 连通 图中一个节点的引用，请你返回该图的 深拷贝（克隆）。
-图中的每个节点都包含它的值 val（int） 和其邻居的列表（list[Node]）。
+给你无向连通图中一个节点的引用，请你返回该图的 深拷贝（克隆）。
+图中的每个节点都包含它的值 Val（int） 和其邻居的列表（list[Node]）。
 class Node {
-    public int val;
+    public int Val;
     public List<Node> neighbors;
 }
 测试用例格式：
-简单起见，每个节点的值都和它的索引相同。例如，第一个节点值为 1（val = 1），第二个节点值为 2（val = 2），以此类推。该图在测试用例中使用邻接列表表示。
+简单起见，每个节点的值都和它的索引相同。例如，第一个节点值为 1（Val = 1），第二个节点值为 2（Val = 2），以此类推。该图在测试用例中使用邻接列表表示。
 邻接列表 是用于表示有限图的无序列表的集合。每个列表都描述了图中节点的邻居集。
 给定节点将始终是图中的第一个节点（值为 1）。你必须将 给定节点的拷贝 作为对克隆图的引用返回。
 示例 1：
@@ -35,7 +35,7 @@ class Node {
 
 提示：
 1.节点数不超过 100 。
-2.每个节点值 Node.val 都是唯一的，1 <= Node.val <= 100。
+2.每个节点值 Node.Val 都是唯一的，1 <= Node.Val <= 100。
 3.无向图是一个简单图，这意味着图中没有重复的边，也没有自环。
 4.由于图是无向的，如果节点 p 是节点 q 的邻居，那么节点 q 也必须是节点 p 的邻居。
 5.图是连通图，你可以从给定节点访问到所有节点。
@@ -50,10 +50,63 @@ class Node {
  */
 
 type Node struct {
-	val       int
-	neighbors []Node
+	Val       int
+	Neighbors []*Node
 }
 
-func cloneGraph(node *Node) *Node {
+var visited = make(map[*Node]*Node)
 
+func cloneGraph(node *Node) *Node {
+	if node == nil {
+		return node
+	}
+
+	if vnode, ok := visited[node]; ok {
+		return vnode
+	}
+
+	cloneNode := &Node{
+		Val:       node.Val,
+		Neighbors: nil,
+	}
+
+	visited[node] = cloneNode
+
+	for _, neighbor := range node.Neighbors {
+		cloneNode.Neighbors = append(cloneNode.Neighbors, cloneGraph(neighbor))
+	}
+
+	return cloneNode
+}
+
+func cloneGraph2(node *Node) *Node {
+	if node == nil {
+		return node
+	}
+
+	queue := make([]*Node, 0)
+	queue = append(queue, node)
+	visited := make(map[*Node]*Node)
+	visited[node] = &Node{
+		Val:       node.Val,
+		Neighbors: nil,
+	}
+
+	for len(queue) > 0 {
+		data := queue[0]
+		queue = queue[1:]
+		for _, neighbor := range data.Neighbors {
+			if _, ok := visited[neighbor]; !ok {
+				queue = append(queue, neighbor)
+				visited[neighbor] = &Node{
+					Val:       neighbor.Val,
+					Neighbors: nil,
+				}
+			}
+
+			visited[data].Neighbors = append(visited[data].Neighbors, visited[neighbor])
+		}
+	}
+
+	return visited[node]
 }
