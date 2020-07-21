@@ -44,7 +44,6 @@ func (this *MyCircularQueue) Front() int {
 		return -1
 	}
 	return this.q[this.head]
-
 }
 
 /** Get the last item from the queue. */
