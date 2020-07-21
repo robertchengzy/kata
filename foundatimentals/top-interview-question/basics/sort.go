@@ -83,6 +83,25 @@ func quickSort(a []int64, low, high int64) { // start起始点，end终止点
 	}
 }
 
+func quickSort2(nums []int) []int {
+	if len(nums) < 2 {
+		return nums
+	} else {
+		pivot := nums[0]
+		var less, greater []int
+		for _, num := range nums[1:] {
+			if num <= pivot {
+				less = append(less, num)
+			} else {
+				greater = append(greater, num)
+			}
+		}
+		nums1 := quickSort2(less)
+		nums2 := quickSort2(greater)
+		return append(append(nums1, pivot), nums2...)
+	}
+}
+
 func partition(a []int64, low, high int64) int64 {
 	p := a[low] // p 是枢纽
 	m := low    // S1 和 S2 一开始是空的
