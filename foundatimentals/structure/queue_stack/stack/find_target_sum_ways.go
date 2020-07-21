@@ -56,7 +56,7 @@ func calculate(nums []int, i, sum, S int) {
 	}
 }
 
-func FindTargetSumWays2(nums []int, S int) int {
+func findTargetSumWays2(nums []int, S int) int {
 	calculate(nums, 0, 0, S)
 	return count
 }
