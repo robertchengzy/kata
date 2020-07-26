@@ -1,5 +1,10 @@
 package queue_stack
 
+import (
+	"strconv"
+	"strings"
+)
+
 /*
 字符串解码
 给定一个经过编码的字符串，返回它解码后的字符串。
@@ -21,5 +26,47 @@ package queue_stack
 */
 
 func decodeString(s string) string {
+	var stack []string
+	var ptr int
+	for ptr < len(s) {
+		cur := s[ptr]
+		if cur >= '0' && cur <= '9' {
+			stack = append(stack, getDigits(s, &ptr))
+		} else if cur >= 'a' && cur <= 'z' || cur >= 'A' && cur <= 'Z' || cur == '[' {
+			stack = append(stack, string(cur))
+			ptr++
+		} else {
+			ptr++
+			var data []string
+			for stack[len(stack)-1] != "[" {
+				data = append(data, stack[len(stack)-1])
+				stack = stack[:len(stack)-1]
+			}
+			length := len(data)
+			for i := 0; i < length/2; i++ {
+				data[i], data[length-i-1] = data[length-i-1], data[i]
+			}
+			stack = stack[:len(stack)-1]
+			repTime, _ := strconv.Atoi(stack[len(stack)-1])
+			stack = stack[:len(stack)-1]
+			stack = append(stack, strings.Repeat(getString(data), repTime))
+		}
+	}
+	return getString(stack)
+}
 
+func getDigits(s string, ptr *int) string {
+	ret := ""
+	for ; s[*ptr] >= '0' && s[*ptr] <= '9'; *ptr++ {
+		ret += string(s[*ptr])
+	}
+	return ret
+}
+
+func getString(v []string) string {
+	ret := ""
+	for _, s := range v {
+		ret += s
+	}
+	return ret
 }

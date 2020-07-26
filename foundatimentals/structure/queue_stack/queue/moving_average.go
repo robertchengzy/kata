@@ -27,7 +27,7 @@ func (this *MovingAverage) Constructor() *MovingAverage {
 }
 
 func (this *MovingAverage) Next(num int) int {
-	if len(this.currentWindow) == 3 {
+	if len(this.currentWindow) == this.maxSize {
 		this.previousSum -= this.currentWindow[0]
 		this.currentWindow = this.currentWindow[1:]
 	}

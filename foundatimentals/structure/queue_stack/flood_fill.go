@@ -23,6 +23,65 @@ sr = 1, sc = 1, newColor = 2
 	image[i][j] 和 newColor 表示的颜色值在范围 [0, 65535]内。
 */
 
-func floodFill(image [][]int, sr int, sc int, newColor int) [][]int {
+var visited map[point]bool
 
+type point struct {
+	x int
+	y int
+}
+
+var row, col int
+
+func floodFill(image [][]int, sr int, sc int, newColor int) [][]int {
+	row = len(image)
+	col = len(image[0])
+	visited = make(map[point]bool)
+	dfs(image, sr, sc, image[sr][sc], newColor)
+	return image
+}
+
+func dfs(image [][]int, i, j, cur, newColor int) {
+	p := point{
+		x: i,
+		y: j,
+	}
+	if i >= 0 && j >= 0 && i < row && j < col && image[i][j] == cur && !visited[p] {
+		visited[p] = true
+		image[i][j] = newColor
+		dfs(image, i+1, j, cur, newColor)
+		dfs(image, i-1, j, cur, newColor)
+		dfs(image, i, j+1, cur, newColor)
+		dfs(image, i, j-1, cur, newColor)
+	}
+}
+
+var dx = []int{1, -1, 0, 0}
+var dy = []int{0, 0, 1, -1}
+
+func floodFill1(image [][]int, sr int, sc int, newColor int) [][]int {
+	row := len(image)
+	col := len(image[0])
+	old := image[sr][sc]
+	image[sr][sc] = newColor
+	var queue []int
+	queue = append(queue, sr, sc)
+	visited = make(map[point]bool)
+	for len(queue) > 0 {
+		x, y := queue[0], queue[1]
+		queue = queue[2:]
+		for i := 0; i < 4; i++ {
+			tx := x + dx[i]
+			ty := y + dy[i]
+			p := point{
+				x: tx,
+				y: ty,
+			}
+			if tx >= 0 && ty >= 0 && tx < row && ty < col && image[tx][ty] == old && !visited[p] {
+				visited[p] = true
+				image[tx][ty] = newColor
+				queue = append(queue, tx, ty)
+			}
+		}
+	}
+	return image
 }

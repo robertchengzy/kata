@@ -54,11 +54,11 @@ func wallsAndGates(rooms [][]int) {
 }
 
 func wallsAndGates2(rooms [][]int) {
-	row := len(rooms)
+	row = len(rooms)
 	if row == 0 {
 		return
 	}
-	col := len(rooms[0])
+	col = len(rooms[0])
 	for i := 0; i < row; i++ {
 		for j := 0; j < col; j++ {
 			if rooms[i][j] == 0 {
@@ -69,8 +69,6 @@ func wallsAndGates2(rooms [][]int) {
 }
 
 func dfs(rooms [][]int, i, j, val int) {
-	row := len(rooms)
-	col := len(rooms[0])
 	if i >= 0 && j >= 0 && i < row && j < col && rooms[i][j] >= val {
 		rooms[i][j] = val
 		dfs(rooms, i+1, j, val+1)
