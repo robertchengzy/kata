@@ -21,5 +21,20 @@ package array
 	任何一个 nums[i] 将会是一个范围在 [-1000, 1000]的整数。
 */
 func pivotIndex(nums []int) int {
+	length := len(nums)
+	for i := 1; i < length; i++ {
+		left, right := 0, 0
+		for j := 0; j < i; j++ {
+			left += nums[j]
+		}
+		for k := i + 1; k < length; k++ {
+			right += nums[k]
+		}
 
+		if left == right {
+			return i
+		}
+	}
+
+	return -1
 }
