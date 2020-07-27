@@ -27,5 +27,27 @@ package queue_stack
 */
 
 func canVisitAllRooms(rooms [][]int) bool {
+	roomNum := len(rooms)
+	if roomNum == 0 {
+		return true
+	}
 
+	visited := make(map[int]bool)
+	var queue []int
+	queue = append(queue, 0)
+	for len(queue) > 0 {
+		cur := queue[0]
+		queue = queue[1:]
+		visited[cur] = true
+		for _, key := range rooms[cur] {
+			if key > 0 && !visited[key] {
+				queue = append(queue, key)
+			}
+		}
+	}
+
+	if len(visited) == roomNum {
+		return true
+	}
+	return false
 }

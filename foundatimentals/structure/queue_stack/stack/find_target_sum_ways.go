@@ -46,10 +46,8 @@ func findTargetSumWays(nums []int, S int) int {
 var count int
 
 func calculate(nums []int, i, sum, S int) {
-	if len(nums) == i {
-		if sum == S {
-			count++
-		}
+	if len(nums) == i && sum == S {
+		count++
 	} else {
 		calculate(nums, i+1, sum+nums[i], S)
 		calculate(nums, i+1, sum-nums[i], S)
