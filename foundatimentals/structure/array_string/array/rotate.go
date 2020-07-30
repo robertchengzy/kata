@@ -35,5 +35,15 @@ package array
 */
 
 func rotate(matrix [][]int) {
-
+	n := len(matrix)
+	for i := 0; i < n; i++ {
+		for j := 0; j < n/2; j++ {
+			matrix[i][j], matrix[i][n-1-j] = matrix[i][n-1-j], matrix[i][j]
+		}
+	}
+	for i := 0; i < n; i++ {
+		for j := 0; j < n-i; j++ {
+			matrix[i][j], matrix[n-1-j][n-1-i] = matrix[n-1-j][n-1-i], matrix[i][j]
+		}
+	}
 }
