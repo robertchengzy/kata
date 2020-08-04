@@ -1,4 +1,6 @@
-package string
+package __string
+
+import "strings"
 
 /*
 翻转字符串里的单词
@@ -23,5 +25,12 @@ package string
 */
 
 func reverseWords(s string) string {
-
+	strs := strings.Split(strings.TrimSpace(s), " ")
+	var res []string
+	for i := len(strs) - 1; i >= 0; i-- {
+		if strs[i] != "" {
+			res = append(res, strs[i])
+		}
+	}
+	return strings.Join(res, " ")
 }

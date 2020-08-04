@@ -1,4 +1,4 @@
-package array
+package __array
 
 /*
 对角线遍历

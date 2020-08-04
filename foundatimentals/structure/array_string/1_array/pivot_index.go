@@ -1,4 +1,4 @@
-package array
+package __array
 
 /*
 寻找数组的中心索引

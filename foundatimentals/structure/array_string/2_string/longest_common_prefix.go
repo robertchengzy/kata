@@ -1,4 +1,4 @@
-package string
+package __string
 
 /*
 最长公共前缀
