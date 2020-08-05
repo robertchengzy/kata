@@ -1,4 +1,4 @@
-package __array
+package array
 
 /*
 旋转矩阵

@@ -1,4 +1,4 @@
-package __string
+package string
 
 /*
 实现 strStr()

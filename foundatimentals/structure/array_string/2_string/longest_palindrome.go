@@ -1,4 +1,4 @@
-package __string
+package string
 
 /*
 最长回文子串

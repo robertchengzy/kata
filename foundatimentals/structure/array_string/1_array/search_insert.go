@@ -1,4 +1,4 @@
-package __array
+package array
 
 /*
 搜索插入位置
