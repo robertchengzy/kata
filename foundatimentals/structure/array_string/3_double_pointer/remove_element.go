@@ -27,5 +27,27 @@ package double_pointer
 */
 
 func removeElement(nums []int, val int) int {
+	l := len(nums)
+	begin, end := 0, l-1
+	if l == 1 && nums[0] != val {
+		return 1
+	}
+	for begin < end {
+		if nums[end] == val {
+			end--
+			continue
+		}
+		if nums[begin] == val {
+			nums[begin], nums[end] = nums[end], nums[begin]
+			end--
+		} else {
+			begin++
+		}
+	}
 
+	if l > 0 && nums[0] == val {
+		return 0
+	}
+
+	return begin + 1
 }
