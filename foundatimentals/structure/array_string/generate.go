@@ -17,5 +17,17 @@ package array_string
 */
 
 func generate(numRows int) [][]int {
-
+	ans := make([][]int, numRows)
+	for i := 0; i < numRows; i++ {
+		arr := make([]int, i+1)
+		arr[0] = 1
+		if i > 0 {
+			arr[i] = 1
+		}
+		for j := 1; j < i && i > 1; j++ {
+			arr[j] = ans[i-1][j-1] + ans[i-1][j]
+		}
+		ans[i] = arr
+	}
+	return ans
 }

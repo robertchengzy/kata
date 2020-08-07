@@ -27,5 +27,5 @@ package array_string
 */
 
 func removeDuplicates(nums []int) int {
-
+	return 0
 }

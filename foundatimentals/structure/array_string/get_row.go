@@ -12,5 +12,12 @@ package array_string
 */
 
 func getRow(rowIndex int) []int {
-	return nil
+	ans := make([]int, rowIndex+1)
+	for i := 0; i <= rowIndex; i++ {
+		ans[i] = 1
+		for j := i - 1; j > 0; j-- {
+			ans[j] = ans[j-1] + ans[j]
+		}
+	}
+	return ans
 }
