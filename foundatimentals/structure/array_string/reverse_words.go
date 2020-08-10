@@ -1,5 +1,7 @@
 package array_string
 
+import "strings"
+
 /*
 反转字符串中的单词 III
 给定一个字符串，你需要反转字符串中每个单词的字符顺序，同时仍保留空格和单词的初始顺序。
@@ -10,5 +12,16 @@ package array_string
 */
 
 func reverseWords(s string) string {
-	return ""
+	words := strings.Split(s, " ")
+	l := len(words)
+	var res []string
+	for i := 0; i < l; i++ {
+		data := []byte(words[i])
+		n := len(data)
+		for j := 0; j < n/2; j++ {
+			data[j], data[n-1-j] = data[n-1-j], data[j]
+		}
+		res = append(res, string(data))
+	}
+	return strings.Join(res, " ")
 }

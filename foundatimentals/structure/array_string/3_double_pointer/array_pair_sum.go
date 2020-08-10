@@ -1,7 +1,6 @@
 package double_pointer
 
 import (
-	"fmt"
 	"sort"
 )
 
@@ -19,7 +18,6 @@ import (
 
 func arrayPairSum(nums []int) int {
 	sort.Ints(nums)
-	fmt.Println(nums)
 	l := len(nums)
 	if l == 2 {
 		return min(nums[0], nums[1])

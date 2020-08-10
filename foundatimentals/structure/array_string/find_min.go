@@ -14,6 +14,18 @@ package array_string
 	输出: 0
 */
 
-func findMin(nums []int) int {
-	return 0
+func FindMin(nums []int) int {
+	left := 0
+	right := len(nums) - 1
+	for left <= right {
+		mid := left + (right-left)/2
+		if nums[mid] == nums[right] {
+			right = right - 1
+		} else if nums[mid] > nums[right] {
+			left = mid + 1
+		} else {
+			right = mid
+		}
+	}
+	return nums[left]
 }

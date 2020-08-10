@@ -18,7 +18,6 @@ package array_string
 你可以想象内部操作如下:
 	// nums 是以“引用”方式传递的。也就是说，不对实参做任何拷贝
 	int len = removeDuplicates(nums);
-
 	// 在函数里修改输入数组对于调用者是可见的。
 	// 根据你的函数返回的长度, 它会打印出数组中该长度范围内的所有元素。
 	for (int i = 0; i < len; i++) {
@@ -27,5 +26,16 @@ package array_string
 */
 
 func removeDuplicates(nums []int) int {
-	return 0
+	n := len(nums)
+	if n < 2 {
+		return n
+	}
+	index := 0
+	for i := 0; i < n; i++ {
+		if nums[i] != nums[index] {
+			index++
+			nums[index] = nums[i]
+		}
+	}
+	return index + 1
 }

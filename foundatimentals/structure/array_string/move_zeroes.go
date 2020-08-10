@@ -12,5 +12,15 @@ package array_string
 */
 
 func moveZeroes(nums []int) {
-
+	if nums == nil {
+		return
+	}
+	var j int
+	for i := 0; i < len(nums); i++ {
+		if nums[i] == 0 {
+			continue
+		}
+		nums[i], nums[j] = nums[j], nums[i]
+		j++
+	}
 }
