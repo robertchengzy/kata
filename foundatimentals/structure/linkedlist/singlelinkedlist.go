@@ -24,33 +24,41 @@ package linkedlist
 	请不要使用内置的 LinkedList 库。
 */
 
+/*
+时间复杂度：
+	addAtHead： O(1)
+	addAtInder，get，deleteAtIndex: O(k)，其中 k 指的是元素的索引。
+	addAtTail：O(N)，其中 N 指的是链表的元素个数。
+空间复杂度：所有的操作都是 O(1)。
+*/
+
 type ListNode struct {
-	val  int
-	next *ListNode
+	Val  int
+	Next *ListNode
 }
 
 type MyLinkedList struct {
-	size int
-	head *ListNode
+	Size int
+	Head *ListNode
 }
 
 /** Initialize your data structure here. */
 func Constructor() MyLinkedList {
 	return MyLinkedList{
-		head: &ListNode{},
+		Head: &ListNode{},
 	}
 }
 
 /** Get the value of the index-th node in the linked list. If the index is invalid, return -1. */
 func (this *MyLinkedList) Get(index int) int {
-	if index < 0 || index >= this.size {
+	if index < 0 || index >= this.Size {
 		return -1
 	}
-	cur := this.head.next
-	for i := 0; i < index; i++ {
-		cur = cur.next
+	cur := this.Head
+	for i := 0; i < index+1; i++ {
+		cur = cur.Next
 	}
-	return cur.val
+	return cur.Val
 }
 
 /** Add a node of value val before the first element of the linked list. After the insertion, the new node will be the first node of the linked list. */
@@ -60,34 +68,33 @@ func (this *MyLinkedList) AddAtHead(val int) {
 
 /** Append a node of value val to the last element of the linked list. */
 func (this *MyLinkedList) AddAtTail(val int) {
-	this.AddAtIndex(this.size, val)
+	this.AddAtIndex(this.Size, val)
 }
 
 /** Add a node of value val before the index-th node in the linked list. If index equals to the length of linked list, the node will be appended to the end of linked list. If index is greater than the length, the node will not be inserted. */
 func (this *MyLinkedList) AddAtIndex(index int, val int) {
-	prev := this.head
+	prev := this.Head
 	// 找到待插入节点的前一个节点
 	for i := 0; i < index; i++ {
-		prev = prev.next
+		prev = prev.Next
 	}
-	prev.next = &ListNode{
-		val:  val,
-		next: prev.next,
-	}
-	this.size++
+	node := &ListNode{Val: val}
+	node.Next = prev.Next
+	prev.Next = node
+	this.Size++
 }
 
 /** Delete the index-th node in the linked list, if the index is valid. */
 func (this *MyLinkedList) DeleteAtIndex(index int) {
-	if index < 0 || index >= this.size {
+	if index < 0 || index >= this.Size {
 		return
 	}
-	prev := this.head
+	prev := this.Head
 	for i := 0; i < index; i++ {
-		prev = prev.next
+		prev = prev.Next
 	}
-	prev.next = prev.next.next
-	this.size--
+	prev.Next = prev.Next.Next
+	this.Size--
 }
 
 /**
@@ -98,8 +105,4 @@ func (this *MyLinkedList) DeleteAtIndex(index int) {
  * obj.AddAtTail(val);
  * obj.AddAtIndex(index,val);
  * obj.DeleteAtIndex(index);
- */
-
-/*
-
  */
