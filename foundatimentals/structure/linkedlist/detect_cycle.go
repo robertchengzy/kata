@@ -28,6 +28,41 @@ package linkedlist
  *     Next *ListNode
  * }
  */
-func detectCycle(head *ListNode) *ListNode {
 
+func detectCycle(head *ListNode) *ListNode {
+	visited := make(map[*ListNode]bool)
+	next := head
+	for next != nil {
+		if visited[next] {
+			return next
+		}
+		visited[next] = true
+		next = next.Next
+	}
+	return nil
+}
+
+// Floyd 的算法被划分成两个不同的 阶段 。在第一阶段，找出列表中是否有环，如果没有环，可以直接返回 null 并退出。否则，用相遇节点来找到环的入口。
+func detectCycle2(head *ListNode) *ListNode {
+	if head == nil || head.Next == nil {
+		return nil
+	}
+	slow, fast := head, head
+	for fast != nil && fast.Next != nil {
+		slow = slow.Next
+		fast = fast.Next.Next
+		if slow == fast {
+			break
+		}
+	}
+
+	if fast == nil || fast.Next == nil {
+		return nil
+	}
+	tmp := head
+	for tmp != slow {
+		tmp = tmp.Next
+		slow = slow.Next
+	}
+	return slow
 }
