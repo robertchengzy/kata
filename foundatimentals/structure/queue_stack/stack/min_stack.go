@@ -9,23 +9,21 @@ top() —— 获取栈顶元素。
 getMin() —— 检索栈中的最小元素。
 示例:
 输入：
-["MinStack","push","push","push","getMin","pop","top","getMin"]
-[[],[-2],[0],[-3],[],[],[],[]]
-
+	["MinStack","push","push","push","getMin","pop","top","getMin"]
+	[[],[-2],[0],[-3],[],[],[],[]]
 输出：
-[null,null,null,null,-3,null,0,-2]
-
+	[null,null,null,null,-3,null,0,-2]
 解释：
-MinStack minStack = new MinStack();
-minStack.push(-2);
-minStack.push(0);
-minStack.push(-3);
-minStack.getMin();   --> 返回 -3.
-minStack.pop();
-minStack.top();      --> 返回 0.
-minStack.getMin();   --> 返回 -2.
+	MinStack minStack = new MinStack();
+	minStack.push(-2);
+	minStack.push(0);
+	minStack.push(-3);
+	minStack.getMin();   --> 返回 -3.
+	minStack.pop();
+	minStack.top();      --> 返回 0.
+	minStack.getMin();   --> 返回 -2.
 提示：
-pop、top 和 getMin 操作总是在 非空栈 上调用。
+	pop、top 和 getMin 操作总是在 非空栈 上调用。
 */
 
 type MinStack struct {
