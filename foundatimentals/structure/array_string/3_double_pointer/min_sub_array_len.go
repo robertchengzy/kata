@@ -19,7 +19,6 @@ import (
 /*
 时间复杂度：O(n^2)，其中 n 是数组的长度。需要遍历每个下标作为子数组的开始下标，对于每个开始下标，需要遍历其后面的下标得到长度最小的子数组。
 空间复杂度：O(1)。
-
 */
 func minSubArrayLen(s int, nums []int) int {
 	l := len(nums)
