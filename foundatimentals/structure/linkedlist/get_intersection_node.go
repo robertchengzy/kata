@@ -36,6 +36,52 @@ package linkedlist
  *     Next *ListNode
  * }
  */
-func getIntersectionNode(headA, headB *ListNode) *ListNode {
 
+/*
+时间复杂度 : O(m+n)。
+空间复杂度 : O(m) 或 O(n)。
+*/
+func getIntersectionNode(headA, headB *ListNode) *ListNode {
+	visted := make(map[*ListNode]bool)
+	nextA := headA
+	for nextA != nil {
+		visted[nextA] = true
+		nextA = nextA.Next
+	}
+
+	nextB := headB
+	for nextB != nil {
+		if visted[nextB] {
+			return nextB
+		}
+		nextB = nextB.Next
+	}
+
+	return nil
+}
+
+/*
+时间复杂度 : O(m+n)。
+空间复杂度 : O(1)。
+*/
+func getIntersectionNode1(headA, headB *ListNode) *ListNode {
+	if headA == nil || headB == nil {
+		return nil
+	}
+	nodeA := headA
+	nodeB := headB
+	for nodeA != nodeB {
+		if nodeA == nil {
+			nodeA = headB
+		} else {
+			nodeA = nodeA.Next
+		}
+
+		if nodeB == nil {
+			nodeB = headA
+		} else {
+			nodeB = nodeB.Next
+		}
+	}
+	return nodeA
 }
