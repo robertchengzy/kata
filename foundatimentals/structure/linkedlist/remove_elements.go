@@ -16,5 +16,17 @@ package linkedlist
  * }
  */
 func removeElements(head *ListNode, val int) *ListNode {
-
+	dummy := new(ListNode)
+	dummy.Next = head
+	first := dummy
+	second := dummy.Next
+	for second != nil {
+		if second.Val == val {
+			first.Next = second.Next
+		} else {
+			first = first.Next
+		}
+		second = second.Next
+	}
+	return dummy.Next
 }
