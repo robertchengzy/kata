@@ -23,5 +23,45 @@ package linkedlist
  * }
  */
 func oddEvenList(head *ListNode) *ListNode {
+	oddx := new(ListNode)
+	evenx := new(ListNode)
+	cur := head
+	odd, even := oddx, evenx
+	i := 0
+	for cur != nil {
+		tmp := cur.Next
+		cur.Next = nil
+		if i%2 == 0 {
+			odd.Next = cur
+			odd = odd.Next
+		} else {
+			even.Next = cur
+			even = even.Next
+		}
+		i++
+		cur = tmp
+	}
+	odd.Next = evenx.Next
+	return oddx.Next
+}
 
+/*
+时间复杂度： O(n) 。总共有 n 个节点，我们每个遍历一次。
+空间复杂度： O(1) 。我们只需要 4 个指针。
+*/
+func oddEvenList1(head *ListNode) *ListNode {
+	if head == nil {
+		return nil
+	}
+	odd := head
+	even := head.Next
+	evenHead := even
+	for even != nil && even.Next != nil {
+		odd.Next = even.Next
+		odd = odd.Next
+		even.Next = odd.Next
+		even = even.Next
+	}
+	odd.Next = evenHead
+	return head
 }
