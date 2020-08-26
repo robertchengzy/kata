@@ -19,5 +19,38 @@ package linkedlist
  * }
  */
 func addTwoNumbers(l1 *ListNode, l2 *ListNode) *ListNode {
+	dummyHead := new(ListNode)
+	carry := 0
+	cur := dummyHead
+	p, q := l1, l2
+	for p != nil || q != nil {
+		x, y := 0, 0
+		if p != nil {
+			x = p.Val
+		}
+		if q != nil {
+			y = q.Val
+		}
+		sum := x + y + carry
+		carry = sum / 10
+		cur.Next = &ListNode{
+			Val:  sum % 10,
+			Next: nil,
+		}
+		cur = cur.Next
+		if p != nil {
+			p = p.Next
+		}
+		if q != nil {
+			q = q.Next
+		}
+	}
 
+	if carry > 0 {
+		cur.Next = &ListNode{
+			Val:  carry,
+			Next: nil,
+		}
+	}
+	return dummyHead.Next
 }
