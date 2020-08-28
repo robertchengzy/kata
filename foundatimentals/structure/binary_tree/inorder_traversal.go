@@ -22,5 +22,12 @@ package binary_tree
  * }
  */
 func inorderTraversal(root *TreeNode) []int {
-
+	var res []int
+	if root == nil {
+		return nil
+	}
+	res = append(res, preorderTraversal(root.Left)...)
+	res = append(res, root.Val)
+	res = append(res, preorderTraversal(root.Right)...)
+	return res
 }
