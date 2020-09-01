@@ -31,3 +31,24 @@ func preorderTraversal(root *TreeNode) []int {
 	res = append(res, preorderTraversal(root.Right)...)
 	return res
 }
+
+func preorderTraversal2(root *TreeNode) []int {
+	if root == nil {
+		return nil
+	}
+	var res []int
+	var stack []*TreeNode
+	stack = append(stack, root)
+	for len(stack) > 0 {
+		cur := stack[len(stack)-1]
+		stack = stack[:len(stack)-1]
+		res = append(res, cur.Val)
+		if cur.Right != nil {
+			stack = append(stack, cur.Right)
+		}
+		if cur.Left != nil {
+			stack = append(stack, cur.Left)
+		}
+	}
+	return res
+}

@@ -34,21 +34,21 @@ func inorderTraversal(root *TreeNode) []int {
 }
 
 func inorderTraversal1(root *TreeNode) []int {
-	res := make([]int, 0)
 	if root == nil {
-		return res
+		return nil
 	}
-	stack := make([]*TreeNode, 0)
-	curNode := root
-	for curNode != nil || len(stack) > 0 {
-		for curNode != nil {
-			stack = append(stack, curNode)
-			curNode = curNode.Left
+	var res []int
+	var stack []*TreeNode
+	cur := root
+	for cur != nil || len(stack) > 0 {
+		for cur != nil {
+			stack = append(stack, cur)
+			cur = cur.Left
 		}
-		curNode = stack[len(stack)-1]
+		cur = stack[len(stack)-1]
 		stack = stack[:len(stack)-1]
-		res = append(res, curNode.Val)
-		curNode = curNode.Right
+		res = append(res, cur.Val)
+		cur = cur.Right
 	}
 	return res
 }
