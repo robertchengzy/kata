@@ -25,5 +25,43 @@ package binary_tree
  * }
  */
 func hasPathSum(root *TreeNode, sum int) bool {
+	if root == nil {
+		return false
+	}
+	sum -= root.Val
+	if root.Left == nil && root.Right == nil {
+		return sum == root.Val
+	}
+	return hasPathSum(root.Left, sum-root.Val) || hasPathSum(root.Right, sum-root.Val)
+}
 
+func hasPathSum1(root *TreeNode, sum int) bool {
+	if root == nil {
+		return false
+	}
+	var queNode []*TreeNode
+	var queVal []int
+	queNode = append(queNode, root)
+	queVal = append(queVal, root.Val)
+	for len(queNode) != 0 {
+		now := queNode[0]
+		queNode = queNode[1:]
+		temp := queVal[0]
+		queVal = queVal[1:]
+		if now.Left == nil && now.Right == nil {
+			if temp == sum {
+				return true
+			}
+			continue
+		}
+		if now.Left != nil {
+			queNode = append(queNode, now.Left)
+			queVal = append(queVal, now.Left.Val+temp)
+		}
+		if now.Right != nil {
+			queNode = append(queNode, now.Right)
+			queVal = append(queVal, now.Right.Val+temp)
+		}
+	}
+	return false
 }
