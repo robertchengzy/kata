@@ -24,5 +24,59 @@ package binary_tree
  * }
  */
 func maxDepth(root *TreeNode) int {
+	answer = 0
+	maximumDepth(root, 1)
+	return answer
+}
 
+var answer int
+
+func maximumDepth(root *TreeNode, depth int) {
+	if root == nil {
+		return
+	}
+	if root.Left == nil && root.Right == nil {
+		answer = max(answer, depth)
+	}
+	maximumDepth(root.Left, depth+1)
+	maximumDepth(root.Right, depth+1)
+}
+
+func max(a, b int) int {
+	if a > b {
+		return a
+	}
+	return b
+}
+
+func maxDepth1(root *TreeNode) int {
+	if root == nil {
+		return 0
+	}
+	return max(maxDepth1(root.Left), maxDepth1(root.Right)) + 1
+}
+
+func maxDepth2(root *TreeNode) int {
+	if root == nil {
+		return 0
+	}
+	var queue []*TreeNode
+	queue = append(queue, root)
+	ans := 0
+	for len(queue) > 0 {
+		sz := len(queue)
+		for sz > 0 {
+			node := queue[0]
+			queue = queue[1:]
+			if node.Left != nil {
+				queue = append(queue, node.Left)
+			}
+			if node.Right != nil {
+				queue = append(queue, node.Right)
+			}
+			sz--
+		}
+		ans++
+	}
+	return ans
 }
