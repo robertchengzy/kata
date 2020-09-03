@@ -1,6 +1,6 @@
 package recursive
 
-import "kata/foundatimentals/structure/binary_tree/tree"
+import "kata/foundatimentals/structure/binary_tree/1_tree"
 
 /*
 对称二叉树
@@ -29,11 +29,11 @@ import "kata/foundatimentals/structure/binary_tree/tree"
  *     Right *TreeNode
  * }
  */
-func isSymmetric(root *tree.TreeNode) bool {
+func isSymmetric(root *TreeNode) bool {
 	return check(root, root)
 }
 
-func check(p, q *tree.TreeNode) bool {
+func check(p, q *TreeNode) bool {
 	if p == nil && q == nil {
 		return true
 	}
@@ -43,9 +43,9 @@ func check(p, q *tree.TreeNode) bool {
 	return p.Val == q.Val && check(p.Left, q.Right) && check(p.Right, q.Left)
 }
 
-func isSymmetric1(root *tree.TreeNode) bool {
+func isSymmetric1(root *TreeNode) bool {
 	u, v := root, root
-	var q []*tree.TreeNode
+	var q []*TreeNode
 	q = append(q, u)
 	q = append(q, v)
 	for len(q) > 0 {
