@@ -1,4 +1,6 @@
-package binary_tree
+package recursive
+
+import "kata/foundatimentals/structure/binary_tree/tree"
 
 /*
 二叉树的最大深度
@@ -23,7 +25,7 @@ package binary_tree
  *     Right *TreeNode
  * }
  */
-func maxDepth(root *TreeNode) int {
+func maxDepth(root *tree.TreeNode) int {
 	answer = 0
 	maximumDepth(root, 1)
 	return answer
@@ -31,7 +33,7 @@ func maxDepth(root *TreeNode) int {
 
 var answer int
 
-func maximumDepth(root *TreeNode, depth int) {
+func maximumDepth(root *tree.TreeNode, depth int) {
 	if root == nil {
 		return
 	}
@@ -49,18 +51,18 @@ func max(a, b int) int {
 	return b
 }
 
-func maxDepth1(root *TreeNode) int {
+func maxDepth1(root *tree.TreeNode) int {
 	if root == nil {
 		return 0
 	}
 	return max(maxDepth1(root.Left), maxDepth1(root.Right)) + 1
 }
 
-func maxDepth2(root *TreeNode) int {
+func maxDepth2(root *tree.TreeNode) int {
 	if root == nil {
 		return 0
 	}
-	var queue []*TreeNode
+	var queue []*tree.TreeNode
 	queue = append(queue, root)
 	ans := 0
 	for len(queue) > 0 {

@@ -1,4 +1,4 @@
-package binary_tree
+package tree
 
 /*
 给定一个二叉树，返回它的中序 遍历。

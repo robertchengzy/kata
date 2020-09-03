@@ -1,4 +1,4 @@
-package binary_tree
+package tree
 
 /*
 二叉树的前序遍历

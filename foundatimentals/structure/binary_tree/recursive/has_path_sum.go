@@ -1,4 +1,6 @@
-package binary_tree
+package recursive
+
+import "kata/foundatimentals/structure/binary_tree/tree"
 
 /*
 路径总和
@@ -24,7 +26,7 @@ package binary_tree
  *     Right *TreeNode
  * }
  */
-func hasPathSum(root *TreeNode, sum int) bool {
+func hasPathSum(root *tree.TreeNode, sum int) bool {
 	if root == nil {
 		return false
 	}
@@ -35,11 +37,11 @@ func hasPathSum(root *TreeNode, sum int) bool {
 	return hasPathSum(root.Left, sum-root.Val) || hasPathSum(root.Right, sum-root.Val)
 }
 
-func hasPathSum1(root *TreeNode, sum int) bool {
+func hasPathSum1(root *tree.TreeNode, sum int) bool {
 	if root == nil {
 		return false
 	}
-	var queNode []*TreeNode
+	var queNode []*tree.TreeNode
 	var queVal []int
 	queNode = append(queNode, root)
 	queVal = append(queVal, root.Val)
