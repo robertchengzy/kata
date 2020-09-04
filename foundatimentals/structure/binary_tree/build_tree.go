@@ -26,3 +26,7 @@ type TreeNode struct {
 func buildTree(inorder []int, postorder []int) *TreeNode {
 
 }
+
+func helper(inLeft, inRight int) *TreeNode {
+
+}
