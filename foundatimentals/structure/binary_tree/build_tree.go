@@ -25,13 +25,11 @@ type TreeNode struct {
 
 var (
 	postorderx []int
-	inorderx   []int
 	postIdx    int
 	idxMap     = make(map[int]int)
 )
 
 func buildTree(inorder []int, postorder []int) *TreeNode {
-	inorderx = inorder
 	postorderx = postorder
 	// start from the last postorder element
 	postIdx = len(postorder) - 1
