@@ -23,10 +23,50 @@ type TreeNode struct {
 	Right *TreeNode
 }
 
-func buildTree(inorder []int, postorder []int) *TreeNode {
+var (
+	postorderx []int
+	inorderx   []int
+	postIdx    int
+	idxMap     = make(map[int]int)
+)
 
+func buildTree(inorder []int, postorder []int) *TreeNode {
+	inorderx = inorder
+	postorderx = postorder
+	// start from the last postorder element
+	postIdx = len(postorder) - 1
+
+	// build a hashmap value -> its index
+	idx := 0
+	for _, val := range inorder {
+		idxMap[val] = idx
+		idx++
+	}
+	return helper(0, len(inorder)-1)
 }
 
 func helper(inLeft, inRight int) *TreeNode {
+	// if there is no elements to construct subtrees
+	if inLeft > inRight {
+		return nil
+	}
 
+	// pick up post_idx element as a root
+	rootVal := postorderx[postIdx]
+	root := &TreeNode{
+		Val: rootVal,
+	}
+
+	// root splits inorder list
+	// into left and right subtrees
+	index := idxMap[rootVal]
+
+	// recursion
+	postIdx--
+
+	// build right subtree
+	root.Right = helper(index+1, inRight)
+	// build left subtree
+	root.Left = helper(inLeft, index-1)
+	return root
 }
