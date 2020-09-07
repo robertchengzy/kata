@@ -68,3 +68,22 @@ func helper(inLeft, inRight int) *TreeNode {
 	root.Left = helper(inLeft, index-1)
 	return root
 }
+
+/*
+算法
+
+创建 hashmap 存储中序序列：value -> its index 。
+
+方法 helper 的参数是中序序列中当前子树的左右边界，该方法仅用于检查子树是否为空。下面分析 helper(in_left = 0, in_right = n - 1) 的逻辑：
+
+	如果 in_left > in_right，说明子树为空，返回 None。
+
+	选择后序遍历的最后一个节点作为根节点。
+
+	假设根节点在中序遍历中索引为 index。从 in_left 到 index - 1 属于左子树，从 index + 1 到 in_right 属于右子树。
+
+	根据后序遍历逻辑，递归创建右子树 helper(index + 1, in_right) 和左子树 helper(in_left, index - 1)。
+
+	返回根节点 root。
+
+*/
