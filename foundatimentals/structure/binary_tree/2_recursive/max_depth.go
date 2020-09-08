@@ -15,14 +15,6 @@ package recursive
 返回它的最大深度 3 。
 */
 
-/**
- * Definition for a binary tree node.
- * type TreeNode struct {
- *     Val int
- *     Left *TreeNode
- *     Right *TreeNode
- * }
- */
 func maxDepth(root *TreeNode) int {
 	answer = 0
 	maximumDepth(root, 1)

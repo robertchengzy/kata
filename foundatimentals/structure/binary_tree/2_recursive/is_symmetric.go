@@ -19,14 +19,6 @@ package recursive
 你可以运用递归和迭代两种方法解决这个问题吗？
 */
 
-/**
- * Definition for a binary tree node.
- * type TreeNode struct {
- *     Val int
- *     Left *TreeNode
- *     Right *TreeNode
- * }
- */
 func isSymmetric(root *TreeNode) bool {
 	return check(root, root)
 }

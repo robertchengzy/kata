@@ -13,14 +13,13 @@ package tree
 进阶: 递归算法很简单，你可以通过迭代算法完成吗？
 */
 
-/**
- * Definition for a binary tree node.
- * type TreeNode struct {
- *     Val int
- *     Left *TreeNode
- *     Right *TreeNode
- * }
- */
+// Definition for a binary tree node.
+type TreeNode struct {
+	Val   int
+	Left  *TreeNode
+	Right *TreeNode
+}
+
 func inorderTraversal(root *TreeNode) []int {
 	if root == nil {
 		return nil
