@@ -16,6 +16,37 @@ package binary_tree
    15   7
 */
 
-func buildTreeX(preorder []int, inorder []int) *TreeNode {
+var (
+	idxMapX   = make(map[int]int)
+	preorderx []int
+	preIdx    int
+)
 
+func buildTreeX(preorder []int, inorder []int) *TreeNode {
+	preorderx = preorder
+	preIdx = 0
+
+	idx := 0
+	for _, val := range inorder {
+		idxMapX[val] = idx
+		idx++
+	}
+	return helperX(0, len(inorder)-1)
+}
+
+func helperX(inLeft, inRight int) *TreeNode {
+	if inLeft > inRight {
+		return nil
+	}
+
+	rootVal := preorderx[preIdx]
+	root := &TreeNode{
+		Val: rootVal,
+	}
+
+	index := idxMapX[rootVal]
+	preIdx++
+	root.Left = helperX(inLeft, index-1)
+	root.Right = helperX(index+1, inRight)
+	return root
 }
