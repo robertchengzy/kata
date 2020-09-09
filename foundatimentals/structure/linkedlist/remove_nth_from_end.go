@@ -10,16 +10,7 @@ package linkedlist
 给定的 n 保证是有效的。
 进阶：
 你能尝试使用一趟扫描实现吗？
-
 */
-
-/**
- * Definition for singly-linked list.
- * type ListNode struct {
- *     Val int
- *     Next *ListNode
- * }
- */
 
 /*
 时间复杂度：O(L)，该算法对含有 L 个结点的列表进行了一次遍历。因此时间复杂度为 O(L)。

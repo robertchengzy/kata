@@ -11,13 +11,6 @@ package linkedlist
 	原因：342 + 465 = 807
 */
 
-/**
- * Definition for singly-linked list.
- * type ListNode struct {
- *     Val int
- *     Next *ListNode
- * }
- */
 func addTwoNumbers(l1 *ListNode, l2 *ListNode) *ListNode {
 	dummyHead := new(ListNode)
 	carry := 0

@@ -21,14 +21,6 @@ package linkedlist
 你是否可以不用额外空间解决此题？
 */
 
-/**
- * Definition for singly-linked list.
- * type ListNode struct {
- *     Val int
- *     Next *ListNode
- * }
- */
-
 func detectCycle(head *ListNode) *ListNode {
 	visited := make(map[*ListNode]bool)
 	next := head

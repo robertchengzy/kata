@@ -20,13 +20,6 @@ package linkedlist
 你能用 O(1)（即，常量）内存解决此问题吗？
 */
 
-/**
- * Definition for singly-linked list.
- * type ListNode struct {
- *     Val int
- *     Next *ListNode
- * }
- */
 func hasCycle(head *ListNode) bool {
 	if head == nil {
 		return false

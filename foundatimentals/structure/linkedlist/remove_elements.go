@@ -8,13 +8,6 @@ package linkedlist
 	输出: 1->2->3->4->5
 */
 
-/**
- * Definition for singly-linked list.
- * type ListNode struct {
- *     Val int
- *     Next *ListNode
- * }
- */
 func removeElements(head *ListNode, val int) *ListNode {
 	dummy := new(ListNode)
 	dummy.Next = head

@@ -13,14 +13,6 @@ package linkedlist
 你能否用 O(n) 时间复杂度和 O(1) 空间复杂度解决此题？
 */
 
-/**
- * Definition for singly-linked list.
- * type ListNode struct {
- *     Val int
- *     Next *ListNode
- * }
- */
-
 /*
 算法：
 	复制链表值到数组列表中。

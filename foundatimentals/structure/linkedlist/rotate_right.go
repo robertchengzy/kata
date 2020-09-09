@@ -19,13 +19,6 @@ package linkedlist
 	向右旋转 4 步: 2->0->1->NULL
 */
 
-/**
- * Definition for singly-linked list.
- * type ListNode struct {
- *     Val int
- *     Next *ListNode
- * }
- */
 func rotateRight(head *ListNode, k int) *ListNode {
 	return nil
 }

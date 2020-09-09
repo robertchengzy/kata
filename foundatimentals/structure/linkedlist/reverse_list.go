@@ -10,14 +10,6 @@ package linkedlist
 你可以迭代或递归地反转链表。你能否用两种方法解决这道题？
 */
 
-/**
- * Definition for singly-linked list.
- * type ListNode struct {
- *     Val int
- *     Next *ListNode
- * }
- */
-
 /*
 时间复杂度：O(n)，假设 n 是列表的长度，时间复杂度是 O(n)。
 空间复杂度：O(1)。

@@ -15,13 +15,6 @@ package linkedlist
 	·链表的第一个节点视为奇数节点，第二个节点视为偶数节点，以此类推。
 */
 
-/**
- * Definition for singly-linked list.
- * type ListNode struct {
- *     Val int
- *     Next *ListNode
- * }
- */
 func oddEvenList(head *ListNode) *ListNode {
 	oddx := new(ListNode)
 	evenx := new(ListNode)

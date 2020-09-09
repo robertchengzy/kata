@@ -29,14 +29,6 @@ package linkedlist
 	程序尽量满足 O(n) 时间复杂度，且仅用 O(1) 内存。
 */
 
-/**
- * Definition for singly-linked list.
- * type ListNode struct {
- *     Val int
- *     Next *ListNode
- * }
- */
-
 /*
 时间复杂度 : O(m+n)。
 空间复杂度 : O(m) 或 O(n)。
