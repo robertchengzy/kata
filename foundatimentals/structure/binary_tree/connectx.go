@@ -24,5 +24,42 @@ struct Node {
 */
 
 func connectX(root *Node) *Node {
+	return connect(root)
+}
 
+func connect2(root *Node) *Node {
+	if root == nil {
+		return nil
+	}
+
+	leftmost = root
+	curr := leftmost
+	for leftmost != nil {
+		prev = nil
+		curr = leftmost
+
+		leftmost = nil
+
+		for curr != nil {
+			processChild(curr.Left)
+			processChild(curr.Right)
+
+			curr = curr.Next
+		}
+	}
+	return root
+}
+
+var prev, leftmost *Node
+
+func processChild(childNode *Node) {
+	if childNode != nil {
+		if prev != nil {
+			prev.Next = childNode
+		} else {
+			leftmost = childNode
+		}
+
+		prev = childNode
+	}
 }
