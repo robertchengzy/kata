@@ -86,9 +86,11 @@ func getClonedNode(node *RNode) *RNode {
 		if ok {
 			return curr
 		} else {
-			visitedMap[node] = &RNode{
+			curr := &RNode{
 				Val: node.Val,
 			}
+			visitedMap[node] = curr
+			return curr
 		}
 	}
 	return nil
