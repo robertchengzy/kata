@@ -20,5 +20,25 @@ package linkedlist
 */
 
 func rotateRight(head *ListNode, k int) *ListNode {
-	return nil
+	if head == nil {
+		return nil
+	}
+	if head.Next == nil {
+		return head
+	}
+	temp := head
+	n := 1
+	for temp.Next != nil {
+		temp = temp.Next
+		n++
+	}
+	temp.Next = head
+	tail := head
+	for i := 0; i < n-k%n-1; i++ {
+		tail = tail.Next
+	}
+	newHead := tail.Next
+	tail.Next = nil
+
+	return newHead
 }

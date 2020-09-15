@@ -15,6 +15,10 @@ import "sort"
 	解释: 区间 [1,4] 和 [4,5] 可被视为重叠区间。
 */
 
+/*
+时间复杂度：O(nlogn)，其中 n 为区间的数量。除去排序的开销，我们只需要一次线性扫描，所以主要的时间开销是排序的 O(nlogn)。
+空间复杂度：O(logn)，其中 n 为区间的数量。这里计算的是存储答案之外，使用的额外空间。O(logn) 即为排序所需要的空间复杂度。
+*/
 func merge(intervals [][]int) [][]int {
 	n := len(intervals)
 	sort.Slice(intervals, func(a, b int) bool {
