@@ -11,7 +11,6 @@ package string
 	输入: "cbbd"
 	输出: "bb"
 */
-
 func longestPalindrome(s string) string {
 	if len(s) == 0 {
 		return ""
@@ -43,7 +42,6 @@ func longestPalindrome(s string) string {
 时间复杂度：O(n^2)，其中 n 是字符串的长度。动态规划的状态总数为 O(n^2)，对于每个状态，我们需要转移的时间为 O(1)。
 空间复杂度：O(n^2)，即存储动态规划状态需要的空间。
 */
-
 func longestPalindrome1(s string) string {
 	n := len(s)
 	ans := ""
