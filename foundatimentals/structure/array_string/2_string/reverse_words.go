@@ -24,6 +24,10 @@ import "strings"
 	请选用 C 语言的用户尝试使用 O(1) 额外空间复杂度的原地解法。
 */
 
+/*
+时间复杂度：O(N)，其中 N 为输入字符串的长度。
+空间复杂度：O(N)，用来存储字符串分割之后的结果。
+*/
 func reverseWords(s string) string {
 	strs := strings.Split(strings.TrimSpace(s), " ")
 	var res []string
@@ -33,4 +37,34 @@ func reverseWords(s string) string {
 		}
 	}
 	return strings.Join(res, " ")
+}
+
+/*
+双端队列
+时间复杂度：O(N)，其中 N 为输入字符串的长度。
+空间复杂度：O(N)，双端队列存储单词需要 O(N) 的空间。
+*/
+func reverseWords1(s string) string {
+	left, right := 0, len(s)-1
+	for left <= right && s[left] == ' ' {
+		left++
+	}
+	for left <= right && s[right] == ' ' {
+		right--
+	}
+	var deque []string
+	var word string
+	for left <= right {
+		c := s[left]
+		if len(word) != 0 && c == ' ' {
+			deque = append([]string{word}, deque...)
+			word = ""
+		} else if c != ' ' {
+			word += string(c)
+		}
+		left++
+	}
+	deque = append([]string{word}, deque...)
+
+	return strings.Join(deque, " ")
 }
