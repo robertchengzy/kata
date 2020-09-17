@@ -49,7 +49,7 @@ func minSubArrayLen(s int, nums []int) int {
 时间复杂度：O(nlogn)，其中 n 是数组的长度。需要遍历每个下标作为子数组的开始下标，
 遍历的时间复杂度是 O(n)，对于每个开始下标，需要通过二分查找得到长度最小的子数组，二分查找得时间复杂度是 O(logn)，
 因此总时间复杂度是 O(nlogn)。
-空间复杂度：O(n)，其中 nn 是数组的长度。额外创建数组 sums 存储前缀和。
+空间复杂度：O(n)，其中 n 是数组的长度。额外创建数组 sums 存储前缀和。
 */
 func minSubArrayLen1(s int, nums []int) int {
 	n := len(nums)
@@ -106,4 +106,11 @@ func minSubArrayLen2(s int, nums []int) int {
 		return 0
 	}
 	return ans
+}
+
+func min(i, j int) int {
+	if i < j {
+		return i
+	}
+	return j
 }
