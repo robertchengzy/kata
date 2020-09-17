@@ -16,6 +16,10 @@ package array_string
 	]
 */
 
+/*
+时间复杂度：O(n^2)
+空间复杂度：O(n^2)
+*/
 func generate1(numRows int) [][]int {
 	ans := make([][]int, numRows)
 	if numRows == 0 {

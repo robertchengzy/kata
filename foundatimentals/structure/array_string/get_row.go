@@ -11,10 +11,6 @@ package array_string
 	你可以优化你的算法到 O(k) 空间复杂度吗？
 */
 
-/*
-时间复杂度：O(n^2)
-空间复杂度：O(n^2)
-*/
 func getRow(rowIndex int) []int {
 	ans := make([]int, rowIndex+1)
 	for i := 0; i <= rowIndex; i++ {
