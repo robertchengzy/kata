@@ -16,31 +16,35 @@ import (
 	2.数组中的元素范围在 [-10000, 10000].
 */
 
+/*
+排序
+时间复杂度：O(nlog(n))。排序需要 O(nlog(n)) 的时间。另外会有一次数组的遍历。
+空间复杂度：O(1)。仅仅需要常数级的空间.
+*/
 func arrayPairSum(nums []int) int {
 	sort.Ints(nums)
-	l := len(nums)
-	if l == 2 {
-		return min(nums[0], nums[1])
-	}
 	sum := 0
-	i, j := 0, l-1
-	for i < j {
-		left := min(nums[i], nums[i+1])
-		right := min(nums[j], nums[j-1])
-		sum += left + right
-		i += 2
-		j -= 2
-		if l/2%2 == 1 && i == j-1 {
-			sum += min(nums[i], nums[i+1])
-			break
-		}
+	for i := 0; i < len(nums); i += 2 {
+		sum += nums[i]
 	}
 	return sum
 }
 
-func min(i, j int) int {
-	if i <= j {
-		return i
+/*
+计数排序
+时间复杂度：O(n)。需要遍历一次哈希表 arr。
+空间复杂度：O(n)。存储一个大小为 n 哈希表 arr 所需要的空间。
+*/
+func arrayPairSum1(nums []int) int {
+	arr := make([]int, 20001)
+	lim := 10000
+	for _, num := range nums {
+		arr[num+lim]++
 	}
-	return j
+	d, sum := 0, 0
+	for i := -10000; i <= 10000; i++ {
+		sum += (arr[i+lim] + 1 - d) / 2 * i
+		d = (2 + arr[i+lim] - d) % 2
+	}
+	return sum
 }
