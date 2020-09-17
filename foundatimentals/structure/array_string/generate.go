@@ -16,18 +16,21 @@ package array_string
 	]
 */
 
-func generate(numRows int) [][]int {
+func generate1(numRows int) [][]int {
 	ans := make([][]int, numRows)
-	for i := 0; i < numRows; i++ {
-		arr := make([]int, i+1)
-		arr[0] = 1
-		if i > 0 {
-			arr[i] = 1
+	if numRows == 0 {
+		return ans
+	}
+	ans[0] = []int{1}
+	for i := 1; i < numRows; i++ {
+		prevRow := ans[i-1]
+		var row []int
+		row = append(row, 1)
+		for j := 1; j < i; j++ {
+			row = append(row, prevRow[j-1]+prevRow[j])
 		}
-		for j := 1; j < i && i > 1; j++ {
-			arr[j] = ans[i-1][j-1] + ans[i-1][j]
-		}
-		ans[i] = arr
+		row = append(row, 1)
+		ans[i] = row
 	}
 	return ans
 }
