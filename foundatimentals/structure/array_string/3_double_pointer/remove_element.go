@@ -27,28 +27,36 @@ package double_pointer
 	}
 */
 
+/*
+双指针
+时间复杂度：O(n)，假设数组总共有 n 个元素，i 和 j 至少遍历 2n 步。
+空间复杂度：O(1)。
+*/
 func removeElement(nums []int, val int) int {
-	l := len(nums)
-	begin, end := 0, l-1
-	if l == 1 && nums[0] != val {
-		return 1
-	}
-	for begin < end {
-		if nums[end] == val {
-			end--
-			continue
+	i := 0
+	for j := 0; j < len(nums); j++ {
+		if nums[j] != val {
+			nums[i] = nums[j]
+			i++
 		}
-		if nums[begin] == val {
-			nums[begin], nums[end] = nums[end], nums[begin]
-			end--
+	}
+	return i
+}
+
+/*
+双指针
+时间复杂度：O(n)，i 和 n 最多遍历 n 步。在这个方法中，赋值操作的次数等于要删除的元素的数量。因此，如果要移除的元素很少，效率会更高。
+空间复杂度：O(1)。
+*/
+func removeElement1(nums []int, val int) int {
+	left, right := 0, len(nums)
+	for left < right {
+		if nums[left] == val {
+			nums[left] = nums[right-1]
+			right--
 		} else {
-			begin++
+			left++
 		}
 	}
-
-	if l > 0 && nums[0] == val {
-		return 0
-	}
-
-	return begin + 1
+	return right
 }
