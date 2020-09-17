@@ -12,53 +12,10 @@ package double_pointer
 	输入数组的长度是正整数，且不超过 10,000。
 */
 
-func findMaxConsecutiveOnes(nums []int) int {
-	l := len(nums)
-	if l == 1 && nums[0] == 1 {
-		return 1
-	}
-	left, right := 0, l-1
-	sum, leftSum, rightSum := 0, 0, 0
-	for left < right {
-		if nums[left] == 1 {
-			leftSum++
-			if leftSum > sum {
-				sum = leftSum
-			}
-		} else {
-			if leftSum > sum {
-				sum = leftSum
-			}
-			leftSum = 0
-		}
-		if nums[right] == 1 {
-			rightSum++
-			if rightSum > sum {
-				sum = rightSum
-			}
-		} else {
-			if rightSum > sum {
-				sum = rightSum
-			}
-			rightSum = 0
-		}
-
-		if left+1 == right && nums[left] == 1 && nums[right] == 1 {
-			if sum < leftSum+rightSum {
-				sum = leftSum + rightSum
-			}
-		}
-		right--
-		left++
-		if left == right && nums[left] == 1 && nums[right] == 1 {
-			if sum < leftSum+rightSum+1 {
-				sum = leftSum + rightSum + 1
-			}
-		}
-	}
-	return sum
-}
-
+/*
+时间复杂度：O(N)。N 是数组的长度。
+空间复杂度：O(1)。
+*/
 func findMaxConsecutiveOnes1(nums []int) int {
 	sum, tmp := 0, 0
 	for _, num := range nums {
