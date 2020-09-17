@@ -19,3 +19,36 @@ func reverseString(s []byte) {
 		s[i], s[l-i-1] = s[l-i-1], s[i]
 	}
 }
+
+/*
+递归
+时间复杂度：O(N)。执行了 N/2 次的交换。
+空间复杂度：O(N)，递归过程中使用的堆栈空间。
+*/
+func reverseString1(s []byte) {
+	helper(s, 0, len(s))
+}
+
+func helper(s []byte, left, right int) {
+	if left >= right {
+		return
+	}
+	s[left], s[right] = s[right], s[left]
+	left++
+	right--
+	helper(s, left, right)
+}
+
+/*
+双指针
+时间复杂度：O(N)。执行了 N/2 次的交换。
+空间复杂度：O(1)，只使用了常数级空间。
+*/
+func reverseString2(s []byte) {
+	left, right := 0, len(s)
+	for left < right {
+		s[left], s[right] = s[right], s[left]
+		left++
+		right--
+	}
+}
