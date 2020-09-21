@@ -41,8 +41,8 @@ func reverseWords1(s string) string {
 		for i < length && s[i] != ' ' {
 			i++
 		}
-		for p := start; p < i; p++ {
-			ret = append(ret, s[start+i-1-p])
+		for p := i - 1; p >= start; p-- {
+			ret = append(ret, s[p])
 		}
 		for i < length && s[i] == ' ' {
 			i++
@@ -54,35 +54,28 @@ func reverseWords1(s string) string {
 
 /*
 思路与算法
-此题也可以直接在原字符串上进行操作，避免额外的空间开销。当找到一个单词的时候，我们交换字符串第一个字符与倒数第一个字符，随后交换第二个字符与倒数第二个字符…… 如此反复，就可以在原空间上翻转单词。
+	此题也可以直接在原字符串上进行操作，避免额外的空间开销。当找到一个单词的时候，我们交换字符串第一个字符与倒数第一个字符，
+	随后交换第二个字符与倒数第二个字符…… 如此反复，就可以在原空间上翻转单词。
 时间复杂度：O(N)。字符串中的每个字符要么在 O(1) 的时间内被交换到相应的位置，要么因为是空格而保持不动。
 空间复杂度：O(1)。因为不需要开辟额外的数组。
 */
 func reverseWords2(s string) string {
-
+	b := []byte(s)
+	i, length := 0, len(s)
+	for i < length {
+		start := i
+		for i < length && s[i] != ' ' {
+			i++
+		}
+		left, right := start, i-1
+		for left < right {
+			b[left], b[right] = b[right], b[left]
+			left++
+			right--
+		}
+		for i < length && s[i] == ' ' {
+			i++
+		}
+	}
+	return string(b)
 }
-
-/*
-char* reverseWords(char* s) {
-    int length = strlen(s);
-    int i = 0;
-    while (i < length) {
-        int start = i;
-        while (i < length && s[i] != ' ') {
-            i++;
-        }
-
-        int left = start, right = i - 1;
-        while (left < right) {
-            char tmp = s[left];
-            s[left] = s[right], s[right] = tmp;
-            left++;
-            right--;
-        }
-        while (i < length && s[i] == ' ') {
-            i++;
-        }
-    }
-    return s;
-}
-*/
