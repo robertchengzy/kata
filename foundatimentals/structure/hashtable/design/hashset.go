@@ -24,24 +24,55 @@ package design
 */
 
 type MyHashSet struct {
+	set [][]int
+}
+
+const SET_MAX_LEN = 100000
+
+func getIndex(key int) int {
+	return key % SET_MAX_LEN
+}
+
+func (this *MyHashSet) getPos(key, index int) int {
+	temp := this.set[index]
+	if temp == nil {
+		return -1
+	}
+
+	for i, data := range temp {
+		if data == key {
+			return i
+		}
+	}
+	return -1
 }
 
 /** Initialize your data structure here. */
 func Constructor() MyHashSet {
-
+	return MyHashSet{set: make([][]int, SET_MAX_LEN)}
 }
 
 func (this *MyHashSet) Add(key int) {
-
+	index := getIndex(key)
+	pos := this.getPos(key, index)
+	if pos < 0 {
+		this.set[index] = append(this.set[index], key)
+	}
 }
 
 func (this *MyHashSet) Remove(key int) {
-
+	index := getIndex(key)
+	pos := this.getPos(key, index)
+	if pos >= 0 {
+		this.set[index] = append(this.set[index][:pos], this.set[index][pos+1:]...)
+	}
 }
 
 /** Returns true if this set contains the specified element */
 func (this *MyHashSet) Contains(key int) bool {
-
+	index := getIndex(key)
+	pos := this.getPos(key, index)
+	return pos >= 0
 }
 
 /**
