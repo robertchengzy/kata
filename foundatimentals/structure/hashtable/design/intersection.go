@@ -15,5 +15,24 @@ package design
 */
 
 func intersection(nums1 []int, nums2 []int) []int {
+	data := make(map[int]bool)
+	for _, num := range nums1 {
+		data[num] = false
+	}
 
+	for _, num := range nums2 {
+		_, ok := data[num]
+		if ok {
+			data[num] = true
+		}
+	}
+
+	var res []int
+	for key, value := range data {
+		if value {
+			res = append(res, key)
+		}
+	}
+
+	return res
 }
