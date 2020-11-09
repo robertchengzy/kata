@@ -1,4 +1,4 @@
-package design
+package _map
 
 /*
 两数之和
@@ -11,5 +11,13 @@ package design
 */
 
 func twoSum(nums []int, target int) []int {
-
+	data := map[int]int{}
+	for idx, v := range nums {
+		res := target - v
+		if idxSec, ok := data[res]; ok {
+			return []int{idxSec, idx}
+		}
+		data[v] = idx
+	}
+	return nil
 }
