@@ -31,7 +31,6 @@ func createHTTPClient() *http.Client {
 			DialContext: (&net.Dialer{
 				Timeout:   30 * time.Second,
 				KeepAlive: 30 * time.Second,
-				DualStack: true,
 			}).DialContext,
 			DisableKeepAlives:     false,
 			MaxIdleConns:          100,
@@ -41,7 +40,6 @@ func createHTTPClient() *http.Client {
 			ResponseHeaderTimeout: 60 * time.Second,
 			ExpectContinueTimeout: 1 * time.Second,
 		},
-		Timeout: 60 * time.Second,
 	}
 	return client
 }
